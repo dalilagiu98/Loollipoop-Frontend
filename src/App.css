@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,3 +41,16 @@
 .read-the-docs {
   color: #888;
 }
+=======
+head::before, head::after,
+body::before, body::after {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 3em;
+  height: 3em;
+  content: '.';
+  mix-blend-mode: screen;
+  animation: 44s -27s move infinite ease-in-out alternate;
+}
+>>>>>>> Stashed changes
