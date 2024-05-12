@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import '../sass/animation.css'; // Assicurati di avere il tuo file SCSS corretto importato
-import { Col, Container, Row } from 'react-bootstrap';
+import '../sass/animation.css'; 
+import { Container } from 'react-bootstrap';
+import Welcome from './Welcome';
 
-const Bubbles = () => {
+const BubblesWelcome = () => {
   useEffect(() => {
     const generateBubbles = () => {
       const bubblesTotal = 50;
@@ -27,16 +28,12 @@ const Bubbles = () => {
 
   return (
     <div className="background">
-        <Container>
-            <Row>
-                <Col className='text-center'>
-                    <div>Hello world</div>
-                </Col>
-            </Row>
+        <Container className='w-100'>
+            <Welcome />
         </Container>
       {/* Il tuo contenuto qui */}
     </div>
   );
 };
 
-export default Bubbles;
+export default BubblesWelcome;

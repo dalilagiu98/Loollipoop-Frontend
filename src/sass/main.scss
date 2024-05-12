@@ -10,4 +10,6 @@ $new-theme-colors: (
 
 $theme-colors: map-merge($theme-colors, $new-theme-colors );
 
+$font-family-base: 'Montserrat', sans-serif;
+
 @import "~bootstrap/scss/bootstrap";
