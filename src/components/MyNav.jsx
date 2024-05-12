@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 const MyNav = function () {
 return(
-   <Navbar collapseOnSelect bg='dark' className="border border-3 border-dark " >
+   <Navbar collapseOnSelect bg='dark' className="border border-3 border-dark z-3" >
       <Container fluid>
         <Navbar.Brand href="#home">
           <img src="logo.png" alt="logo" style={{height: "2.5em"}}/>
