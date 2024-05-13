@@ -34,7 +34,7 @@ export const fetchLoginUser = (user) => {
     });
 
     if (!response.ok) {
-      throw new Error("Network response was noit ok");
+      throw new Error("Network response was not ok");
     }
 
     const data = await response.json();

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { fetchCreateUser } from '../redux/actions/action';
+import { Link } from "react-router-dom";
 
 const Register = function () {
 
@@ -28,6 +29,12 @@ const Register = function () {
     }
 
     return (
+        <>
+        <Row>
+            <Col>
+                <Link to="/welcome" className='btn btn-primary rounded-circle'><i className="bi bi-chevron-left"></i></Link>
+            </Col>
+        </Row>
         <Row className='justify-content-center'>
             <Col className='col-12 col-md-6'>
                 <Form className='d-flex flex-column align-items-center' onSubmit={handleSubmit}>
@@ -94,7 +101,7 @@ const Register = function () {
                 </Form>
             </Col>
         </Row>
-
+    </>
     )
 }
 

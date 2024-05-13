@@ -13,7 +13,7 @@ const Welcome = function () {
                     <Card.Body>
                         <Card.Title className="fw-bold fs-1">Entra in una delle più innovative community al mondo.</Card.Title>
                         <Card.Text className="fs-5">
-                            Unisciti e vivi l&apos;esperienza come Host o Guest.
+                            Unisciti e vivi l&apos;esperienza come Guest e Host.
                         </Card.Text>
                         <Container fluid className="p-0">
                             <Row className="justify-content-">

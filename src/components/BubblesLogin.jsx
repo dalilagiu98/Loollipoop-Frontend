@@ -28,7 +28,7 @@ const BubblesLogin = () => {
 
   return (
     <div className="background">
-        <Container className='w-100'>
+        <Container fluid className='w-100'>
             <Login />
         </Container>
       {/* Il tuo contenuto qui */}
