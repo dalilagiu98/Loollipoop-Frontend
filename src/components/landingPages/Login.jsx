@@ -2,9 +2,9 @@ import { Row, Col, Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from 'react';
-import { useDispatch } from "react-redux";
-import { fetchLoginUser } from '../redux/actions/action';
-import { Link } from "react-router-dom";
+import { useDispatch,  } from "react-redux";
+import { fetchLoginUser,  } from '../../redux/actions/action';
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -14,14 +14,22 @@ const Login = () => {
         password: ""
     });
 
+
+    //NAVIGATE:
+    const navigate = useNavigate()
+
+    //SELECTOR:
+
+
+
     //DISPATCH:
     const dispatch = useDispatch();
 
     //FUNCTIONS:
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         dispatch(fetchLoginUser(form))
+        navigate("/")
     }
     return(
         <>

@@ -1,5 +1,7 @@
 export const CREATE_USER = "CREATE_USER";
 export const LOGIN_USER = "LOGIN_USER";
+export const GET_PERSONAL_PROFILE = "GET_PERSONAL_PROFILE";
+export const LOGOUT_USER = "LOGOUT_USER";
 
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
@@ -41,5 +43,38 @@ export const fetchLoginUser = (user) => {
 
     dispatch({ type: LOGIN_USER, payload: data });
     localStorage.setItem("accessToken", data.accessToken);
+  };
+};
+
+export const fetchPersonalProfile = () => {
+  return async (dispatch) => {
+    try {
+      let token = localStorage.getItem("accessToken");
+      const response = await fetch("http://localhost:3001/users/me", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({
+          type: GET_PERSONAL_PROFILE,
+          payload: data,
+        });
+      } else {
+        throw new Error(`Error in fetch - ${response.status}`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const logoutAction = () => {
+  localStorage.setItem("accessToken", "");
+  return {
+    type: LOGOUT_USER,
   };
 };

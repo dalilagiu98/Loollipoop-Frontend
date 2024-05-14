@@ -2,10 +2,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "../src/sass/main.css";
 import "typeface-montserrat";
 import "./App.css";
+import BubblesWelcome from "./components/landingPages/BubblesWelcome"
+import BubblesRegister from "./components/landingPages/BubblesRegister"
+import BubblesLogin from "./components/landingPages/BubblesLogin"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import BubblesWelcome from "./components/BubblesWelcome";
-import BubblesRegister from "./components/BubblesRegister";
-import BubblesLogin from "./components/BubblesLogin";
+import MyNav from "./components/MyNav"
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
         <Route path="/welcome" element={<BubblesWelcome />} />
         <Route path="/registration" element={<BubblesRegister />} />
         <Route path="/login" element={<BubblesLogin />} />
+        <Route path="/" element={
+          <MyNav />
+        } />
       </Routes>
     </BrowserRouter>
   );

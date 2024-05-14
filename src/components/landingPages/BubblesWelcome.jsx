@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import '../sass/animation.css'; 
+import "../../sass/animation.css"; 
 import { Container } from 'react-bootstrap';
-import Register from './Register';
+import Welcome from './Welcome';
 
-const BubblesRegister = () => {
+const BubblesWelcome = () => {
   useEffect(() => {
     const generateBubbles = () => {
       const bubblesTotal = 50;
@@ -28,12 +28,12 @@ const BubblesRegister = () => {
 
   return (
     <div className="background">
-        <Container fluid className='w-100'>
-            <Register /> 
+        <Container className='w-100'>
+            <Welcome />
         </Container>
       {/* Il tuo contenuto qui */}
     </div>
   );
 };
 
-export default BubblesRegister;
+export default BubblesWelcome;

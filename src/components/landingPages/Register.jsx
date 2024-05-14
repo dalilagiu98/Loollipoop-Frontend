@@ -3,7 +3,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 import { useDispatch } from "react-redux";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { fetchCreateUser } from '../redux/actions/action';
+import { fetchCreateUser } from '../../redux/actions/action';
 import { Link } from "react-router-dom";
 
 const Register = function () {
