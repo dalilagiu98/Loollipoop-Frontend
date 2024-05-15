@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import MyNav from "./components/MyNav"
 import Profile from "./components/Profile";
 import Footer from "./components/Footer";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -19,12 +20,22 @@ function App() {
         <Route path="/registration" element={<BubblesRegister />} />
         <Route path="/login" element={<BubblesLogin />} />
         <Route path="/" element={
+          <>
           <MyNav />
+          <Footer />
+          </>
         } />
         <Route path="/me" element={
           <>
           <MyNav />
           <Profile />
+          <Footer />
+          </>
+        } />
+        <Route path="*" element={
+          <>
+          <MyNav />
+          <NotFound />
           <Footer />
           </>
         } />
