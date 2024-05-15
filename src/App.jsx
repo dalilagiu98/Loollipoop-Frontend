@@ -9,6 +9,7 @@ import BubblesLogin from "./components/landingPages/BubblesLogin"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import MyNav from "./components/MyNav"
 import Profile from "./components/Profile";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <>
           <MyNav />
           <Profile />
+          <Footer />
           </>
         } />
       </Routes>

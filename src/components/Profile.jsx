@@ -163,7 +163,7 @@ const Profile = () => {
                             <img src='logo.png' alt='logo' style={{height: '2em'}}/>                     
                             <h2 className="text-dark fw-bolder ">Personal informations:</h2>
                             {
-                                isHoveredBig && <i onClick={handleShowBig} className="bi bi-pencil-fill fs-4 btn rounded-circle position-absolute btn-outline-dark border-0" style={{top: "-0.3em", right: "0"}}></i>
+                                isHoveredBig && <i onClick={handleShowBig} className="bi bi-pencil-fill fs-4 btn rounded-circle position-absolute btn-outline-dark border-0 hovered-button" style={{top: "-0.3em", right: "0"}}></i>
                             }
                             {
                                 showBig && <ModalModifyProfile  show={showBig} handleClose={handleCloseBig}/>
@@ -195,7 +195,7 @@ const Profile = () => {
                         <Col xs={12}>
                         
                             <Button onClick={!roles.includes("HOST")? (handleShowRole) : (handleShowRemoveRole)} variant="dark" className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm "> { !roles.includes('HOST') ? ("Upgrade to Host") : ("Downgrade")}</Button>
-                            
+
                             {!roles.includes('HOST') && showRole && <ModalAddHost show={showRole} handleClose={handleCloseRole}/>}
 
                             {roles.includes('HOST') && showRemoveRole && <ModalRemoveHost handleClose={handleCloseRemoveRole} show={showRemoveRole}/> }
