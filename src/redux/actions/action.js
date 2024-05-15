@@ -2,6 +2,7 @@ export const CREATE_USER = "CREATE_USER";
 export const LOGIN_USER = "LOGIN_USER";
 export const GET_PERSONAL_PROFILE = "GET_PERSONAL_PROFILE";
 export const LOGOUT_USER = "LOGOUT_USER";
+export const CREATE_LOO = "CREATE_LOO";
 
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
@@ -76,5 +77,31 @@ export const logoutAction = () => {
   localStorage.setItem("accessToken", "");
   return {
     type: LOGOUT_USER,
+  };
+};
+
+export const fetchPersonalLoos = (loo) => {
+  return async (dispatch) => {
+    const body = JSON.stringify(loo);
+    const token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch("http://localhost:3001/users/me/loos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: body,
+      });
+
+      if (response.ok) {
+        let data = await response.json();
+        dispatch({ type: CREATE_LOO, payload: data });
+      } else {
+        throw new Error("Error in creation loo");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 };

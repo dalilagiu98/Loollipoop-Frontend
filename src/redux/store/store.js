@@ -2,11 +2,13 @@ import createUserReducer from "../reducers/createUser";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import loginUserReducer from "../reducers/loginUser";
 import getPersonalProfileReducer from "../reducers/getMyProfile";
+import createLooReducer from "../reducers/createLoo";
 
 const mainReducer = combineReducers({
   createUser: createUserReducer,
   loginUser: loginUserReducer,
   getPersonalProfile: getPersonalProfileReducer,
+  createLoo: createLooReducer,
 });
 
 const store = configureStore({
