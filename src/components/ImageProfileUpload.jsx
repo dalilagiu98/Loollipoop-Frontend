@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
+import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from "react-redux"
 import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';
@@ -60,7 +61,7 @@ const ImageProfileUpload = ({ handleClose }) => {
         <>
         <Container>
           <Row>
-            <Col className="p-3">
+            <Col className="px-2">
 
                 <InputGroup className="mb-5 roundend-pill" >
                     <Form.Control
@@ -81,11 +82,11 @@ const ImageProfileUpload = ({ handleClose }) => {
                         !isUploading && isError && <h6 className="text-dark fw-medium">Error to upload file!</h6>
                     }
                 </div>
-                <div className="d-flex justify-content-evenly">
-                    <Button onClick={handleUpload} className="me-2 rounded-pill text-secondary px-4 shadow-sm ">Upload</Button>
+                <Modal.Footer className="d-flex justify-content-evenly">
+                        <Button onClick={handleUpload} className="rounded-pill text-secondary px-4 shadow-sm ">Upload</Button>
 
-                    <Button onClick={handleClose} className="rounded-pill text-secondary shadow-sm">Save & Close</Button> 
-                </div>
+                        <Button onClick={handleClose} className="rounded-pill text-secondary shadow-sm">Save & Close</Button>
+                </Modal.Footer>
 
             </Col>
           </Row>

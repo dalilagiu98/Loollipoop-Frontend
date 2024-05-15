@@ -5,6 +5,7 @@ import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux"
 import { fetchPersonalProfile } from "../redux/actions/action";
 import ImageProfileUpload from "./ImageProfileUpload";
+import ModalModifyProfile from "./ModalModifyProfile";
 
 
 const Profile = () => {
@@ -12,6 +13,8 @@ const Profile = () => {
     //STATE:
     const [isHovered, setIsHovered] = useState(false);
     const [show, setShow] = useState(false);
+    const [isHoveredBig, setIsHoveredBig] = useState(false)
+    const [showBig, setShowBig] = useState(false)
 
     //SELECTOR:
     const userLogged = useSelector((state) => {
@@ -34,6 +37,7 @@ const Profile = () => {
     }, [])
 
     //FUNCTIONS:
+    //generate rate icons:
     const generateRatingIcons = (rating) => {
         const fullStars = Math.floor(rating);
         const halfStar = rating - fullStars >= 0.5 ? 1 : 0;
@@ -53,9 +57,13 @@ const Profile = () => {
         return icons
     }
 
-    //show/close modal:
+    //show/close modal image:
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false)
+
+    //show modal modifies:
+    const handleShowBig = () => setShowBig(true)
+    const handleCloseBig = () => setShowBig(false)
     
     return (
         <Container className="h-100 mb-5" style={{marginTop: "4em"}}>
@@ -86,12 +94,12 @@ const Profile = () => {
                             }
                             {
                                 show && (
-                                <Modal show={show} onHide={handleClose} animation={false}>
-                                    <Modal.Header className="bg-tertiary mb-3" closeButton>
+                                <Modal show={show} onHide={handleClose} animation={false} className="border border-primary">
+                                    <Modal.Header className="bg-tertiary mb-3 border border-primary" closeButton>
                                       <Modal.Title className="text-dark display-6">Upload image profile</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <p className="m-0 p-0 fs-6 text-primary fw-light">Choose an image from your device, then upload and save your modifies.</p>
+                                        <p className="m-0 p-2 fs-6 text-primary fw-light mb-2">Choose an image from your device, then upload and save your modifies.</p>
                                         <ImageProfileUpload handleClose={handleClose}/>
                                     </Modal.Body>
 
@@ -134,11 +142,17 @@ const Profile = () => {
                     
                 </Col>
                 <Col>
-                    <div className="p-3 bg-tertiary rounded shadow-sm">
+                    <div onMouseEnter={() => setIsHoveredBig(true)} onMouseLeave={() => setIsHoveredBig(false)} className="p-3 bg-tertiary rounded shadow-sm">
 
-                        <div className="d-flex border-bottom pb-2 border-primary mb-4">
+                        <div className="d-flex border-bottom pb-2 border-primary mb-4 position-relative">
                             <img src='logo.png' alt='logo' style={{height: '2em'}}/>                     
                             <h2 className="text-dark fw-bolder ">Personal informations:</h2>
+                            {
+                                isHoveredBig && <i onClick={handleShowBig} className="bi bi-pencil-fill fs-4 btn rounded-circle position-absolute btn-outline-dark border-0" style={{top: "-0.3em", right: "0"}}></i>
+                            }
+                            {
+                                showBig && <ModalModifyProfile  show={showBig} handleClose={handleCloseBig}/>
+                            }
                         </div>
 
                         <h5 className="text-dark fw-medium">Name:</h5>
