@@ -6,15 +6,21 @@ import { useSelector, useDispatch } from "react-redux"
 import { fetchPersonalProfile } from "../redux/actions/action";
 import ImageProfileUpload from "./ImageProfileUpload";
 import ModalModifyProfile from "./ModalModifyProfile";
+import ModalAddHost from "./ModalAddHost";
+import ModalRemoveHost from "./ModalRemoveHost";
 
 
 const Profile = () => {
 
     //STATE:
+    //modals:
     const [isHovered, setIsHovered] = useState(false);
     const [show, setShow] = useState(false);
-    const [isHoveredBig, setIsHoveredBig] = useState(false)
-    const [showBig, setShowBig] = useState(false)
+    const [isHoveredBig, setIsHoveredBig] = useState(false);
+    const [showBig, setShowBig] = useState(false);
+    const [showRole, setShowRole] = useState(false);
+    const [showRemoveRole, setShowRemoveRole] = useState(false)
+
 
     //SELECTOR:
     const userLogged = useSelector((state) => {
@@ -59,11 +65,20 @@ const Profile = () => {
 
     //show/close modal image:
     const handleShow = () => setShow(true);
-    const handleClose = () => setShow(false)
+    const handleClose = () => setShow(false);
 
-    //show modal modifies:
-    const handleShowBig = () => setShowBig(true)
-    const handleCloseBig = () => setShowBig(false)
+    //show/close modal modifies:
+    const handleShowBig = () => setShowBig(true);
+    const handleCloseBig = () => setShowBig(false);
+
+    //show/close modal roles:
+    const handleShowRole = () => setShowRole(true);
+    const handleCloseRole = () => setShowRole(false);
+
+    //show/close modal remove role:
+    const handleShowRemoveRole = () => setShowRemoveRole(true);
+    const handleCloseRemoveRole = () => setShowRemoveRole(false);
+
     
     return (
         <Container className="h-100 mb-5" style={{marginTop: "4em"}}>
@@ -95,7 +110,7 @@ const Profile = () => {
                             {
                                 show && (
                                 <Modal show={show} onHide={handleClose} animation={false} className="border border-primary">
-                                    <Modal.Header className="bg-tertiary mb-3 border border-primary" closeButton>
+                                    <Modal.Header className="bg-tertiary mb-3 border border-primary">
                                       <Modal.Title className="text-dark display-6">Upload image profile</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
@@ -179,8 +194,11 @@ const Profile = () => {
                     <Row className="mt-4 text-center text-md-end">
                         <Col xs={12}>
                         
-                            <Button variant="dark" className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm "> { !roles.includes('HOST') ? ("Upgrade to Host") : ("Downgrade")}</Button>
-                        
+                            <Button onClick={!roles.includes("HOST")? (handleShowRole) : (handleShowRemoveRole)} variant="dark" className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm "> { !roles.includes('HOST') ? ("Upgrade to Host") : ("Downgrade")}</Button>
+                            
+                            {!roles.includes('HOST') && showRole && <ModalAddHost show={showRole} handleClose={handleCloseRole}/>}
+
+                            {roles.includes('HOST') && showRemoveRole && <ModalRemoveHost handleClose={handleCloseRemoveRole} show={showRemoveRole}/> }
                         </Col>
                     </Row>
                 </Container>

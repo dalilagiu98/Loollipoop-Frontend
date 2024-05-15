@@ -83,9 +83,9 @@ const ImageProfileUpload = ({ handleClose }) => {
                     }
                 </div>
                 <Modal.Footer className="d-flex justify-content-evenly">
-                        <Button onClick={handleUpload} className="rounded-pill text-secondary px-4 shadow-sm ">Upload</Button>
+                        <Button onClick={handleUpload} className="text-primary border border-primary fs-5 fw-medium rounded-pill px-4 shadow-sm" variant="secondary" >Upload</Button>
 
-                        <Button onClick={handleClose} className="rounded-pill text-secondary shadow-sm">Save & Close</Button>
+                        <Button onClick={handleClose} className=" text-secondary border border-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm" >Save & Close</Button>
                 </Modal.Footer>
 
             </Col>

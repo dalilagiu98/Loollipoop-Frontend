@@ -69,12 +69,17 @@ console.log(inputForm.surname)
         <Modal show={show} onHide={handleClose} size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered className="border border-primary">
-            <Modal.Header className="bg-tertiary mb-3 border border-primary" closeButton>
+            <Modal.Header className="bg-tertiary mb-3 border border-primary">
             <Modal.Title className="text-dark display-6">Modify personal informations</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
                 <Container>
+                    <Row className='justify-content-center mb-3'>
+                        <Col xs={10}>
+                            <p className="text-primary fw-medium mb-2 text-center">Change the information you want to modify and then save:</p>
+                        </Col>
+                    </Row>
                     <Row className='justify-content-center'>
                         <Col xs={8}>
                             <Form>
@@ -119,10 +124,10 @@ console.log(inputForm.surname)
                 {
                     !isUploading && isError && <h6 className="text-dark fw-medium">Error to upload file!</h6>
                 }
-                <Button variant="secondary" onClick={handleClose}>
+                <Button className="text-primary border border-primary fs-5 fw-medium rounded-pill px-4 shadow-sm" variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleSubmit}>
+                <Button className=" text-secondary border border-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm" onClick={handleSubmit}>
                     Save Changes
                 </Button>
             </Modal.Footer>
