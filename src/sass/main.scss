@@ -1,6 +1,14 @@
 @import "~bootstrap/scss/functions";
 @import "~/bootstrap/scss/variables";
 
+//INPUT:
+$input-color: #fd8c9b;
+$input-border-color: #FD6B7D;
+
+$input-group-addon-color: $input-color;
+$input-group-addon-bg: #fbc2c8;
+$input-group-addon-border-color: $input-border-color;
+
 $new-theme-colors: (
     "primary": #fd8c9b,
     "secondary": #f7f5ee,

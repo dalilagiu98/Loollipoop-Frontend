@@ -1,5 +1,10 @@
 import { useState } from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
+import { useDispatch } from "react-redux"
+import Spinner from 'react-bootstrap/Spinner';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import { fetchPersonalProfile } from "../redux/actions/action";
 
 // eslint-disable-next-line react/prop-types
 const ImageProfileUpload = ({ handleClose }) => {
@@ -9,7 +14,12 @@ const ImageProfileUpload = ({ handleClose }) => {
 
     //STATE:
     const [file, setFile] = useState();
+    const[isUploading, setIsUploading] = useState(false);
+    const [isError, setIsError] = useState(false)
+    const [isUploaded, setIsUploaded] = useState(false);
 
+    //DISAPATCH:
+    const dispatch = useDispatch()
     //FUNCTIONS:
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
@@ -18,7 +28,7 @@ const ImageProfileUpload = ({ handleClose }) => {
     const handleUpload = async () => {
         let formData = new FormData();
         formData.append("avatar", file);
-
+        setIsUploading(true)
         try {
             let response = await fetch("http://localhost:3001/users/me/avatar", {
                 method: "PATCH",
@@ -31,7 +41,12 @@ const ImageProfileUpload = ({ handleClose }) => {
             if(response.ok) {
                 let data = await response.json();
                 console.log(data);
+                setIsUploading(false)
+                setIsUploaded(true)
+                dispatch(fetchPersonalProfile())
             } else {
+                setIsUploading(false)
+                setIsError(true);
                 throw new Error("Error in upload image")
             }
 
@@ -46,14 +61,32 @@ const ImageProfileUpload = ({ handleClose }) => {
         <Container>
           <Row>
             <Col className="p-3">
-              <input
-                className="d-block mb-3 form-control rounded-pills"
-                type="file"
-                onChange={handleFileChange}
-                placeholder="No such file uploaded"
-              />
-              <Button onClick={handleUpload} className="me-2 rounded-pill text-secondary">Upload</Button>
-              <Button onClick={handleClose} className="rounded-pill text-secondary">Save & Close</Button>
+
+                <InputGroup className="mb-5 roundend-pill" >
+                    <Form.Control
+                    onChange={handleFileChange}
+                    label="Choose file"
+                    className="rounded-pill"
+                    type="file"
+                    />
+                </InputGroup> 
+                <div className="d-flex justify-content-center mb-2">
+                    {
+                        isUploading && <Spinner animation="border" size="sm" variant="primary"/>
+                    }
+                    {
+                        !isUploading && isUploaded && !isError && <h6 className="text-dark fw-medium">Uploaded!</h6>
+                    }
+                    {
+                        !isUploading && isError && <h6 className="text-dark fw-medium">Error to upload file!</h6>
+                    }
+                </div>
+                <div className="d-flex justify-content-evenly">
+                    <Button onClick={handleUpload} className="me-2 rounded-pill text-secondary px-4 shadow-sm ">Upload</Button>
+
+                    <Button onClick={handleClose} className="rounded-pill text-secondary shadow-sm">Save & Close</Button> 
+                </div>
+
             </Col>
           </Row>
         </Container>

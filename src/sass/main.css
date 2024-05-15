@@ -2116,13 +2116,13 @@ progress {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--bs-body-color);
+  color: #fd8c9b;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
   background-color: var(--bs-body-bg);
   background-clip: padding-box;
-  border: var(--bs-border-width) solid var(--bs-border-color);
+  border: var(--bs-border-width) solid #FD6B7D;
   border-radius: var(--bs-border-radius);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -2694,11 +2694,11 @@ textarea.form-control-lg {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--bs-body-color);
+  color: #fd8c9b;
   text-align: center;
   white-space: nowrap;
-  background-color: var(--bs-tertiary-bg);
-  border: var(--bs-border-width) solid var(--bs-border-color);
+  background-color: #fbc2c8;
+  border: var(--bs-border-width) solid #FD6B7D;
   border-radius: var(--bs-border-radius);
 }
 

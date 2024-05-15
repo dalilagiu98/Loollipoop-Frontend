@@ -87,10 +87,14 @@ const Profile = () => {
                             {
                                 show && (
                                 <Modal show={show} onHide={handleClose} animation={false}>
-                                    <Modal.Header className="bg-background" closeButton>
-                                      <Modal.Title>Upload image profile</Modal.Title>
+                                    <Modal.Header className="bg-tertiary mb-3" closeButton>
+                                      <Modal.Title className="text-dark display-6">Upload image profile</Modal.Title>
                                     </Modal.Header>
-                                    <ImageProfileUpload handleClose={handleClose}/>
+                                    <Modal.Body>
+                                        <p className="m-0 p-0 fs-6 text-primary fw-light">Choose an image from your device, then upload and save your modifies.</p>
+                                        <ImageProfileUpload handleClose={handleClose}/>
+                                    </Modal.Body>
+
                                 </Modal>   
                                 )
                             }
