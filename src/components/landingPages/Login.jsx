@@ -14,13 +14,8 @@ const Login = () => {
         password: ""
     });
 
-
     //NAVIGATE:
     const navigate = useNavigate()
-
-    //SELECTOR:
-
-
 
     //DISPATCH:
     const dispatch = useDispatch();

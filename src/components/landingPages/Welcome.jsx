@@ -11,9 +11,9 @@ const Welcome = function () {
             <Col xs={12} md={7}>
                 <Card  className="bg-transparent border-0">
                     <Card.Body>
-                        <Card.Title className="fw-bold fs-1">Entra in una delle più innovative community al mondo.</Card.Title>
+                        <Card.Title className="fw-bold fs-1">Join one of the most innovative communities in the world.</Card.Title>
                         <Card.Text className="fs-5">
-                            Unisciti e vivi l&apos;esperienza come Guest e Host.
+                        Connect, and experience as a Guest and Host.
                         </Card.Text>
                         <Container fluid className="p-0">
                             <Row className="justify-content-">
@@ -21,7 +21,7 @@ const Welcome = function () {
                                     <Link to="/login" className="btn btn-success card-link rounded-pill w-100 btn-outline-primary text-black">Login</Link>
                                 </Col>
                                 <Col>
-                                    <Link to="/registration" className="btn btn-primary card-link rounded-pill w-100 border -success">Registrati</Link>
+                                    <Link to="/registration" className="btn btn-primary card-link rounded-pill w-100 border -success">Sign up</Link>
                                 </Col>
                             </Row>
                         </Container>

@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import { LiaToiletSolid } from "react-icons/lia";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
 import { logoutAction } from '../redux/actions/action';
@@ -18,10 +19,11 @@ const MyNav = function () {
   const token = useSelector((state) => {
     return state.loginUser.token 
 })
+const tokenLocalStorage = localStorage.getItem("accessToken")
 
   //EFFECT:
   useEffect(()=>{
-    if(token) {
+    if(tokenLocalStorage) {
       dispatch(fetchPersonalProfile())
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,7 +42,7 @@ const MyNav = function () {
   }
 
   return(
-    <Navbar collapseOnSelect expand="md" className="bg-dark py-0 ">
+    <Navbar collapseOnSelect expand="md" className="bg-dark py-0 position-fixed top-0 end-0 start-0 z-3">
       <Container fluid>
         <Link to="/" className='navbar-brand'>
           <img src='logo.png' alt='logo' style={{height: '2em'}}/>
@@ -48,8 +50,8 @@ const MyNav = function () {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link className='text-white fw-medium'>Cerca per indirizzo</Nav.Link>
-            <Nav.Link className='text-white fw-medium'>Cerca per posizione</Nav.Link>
+            <Nav.Link className='text-white fw-medium'>Search by address</Nav.Link>
+            <Nav.Link className='text-white fw-medium'>Search by position</Nav.Link>
 
           </Nav>
           
@@ -58,10 +60,10 @@ const MyNav = function () {
             {avatarImage?  (<NavDropdown title={
                 <img src={avatarImage} alt='logo' style={{width: "40px", height:"40px", objectFit: "cover"}} className='rounded-circle'/>
             } id="collapsible-nav-dropdown" className='dropstart'>
-              <Link to="/me" className='dropdown-item'>Account</Link>
-              <Link to="/me/myLoos" className='dropdown-item'>Your Loos</Link>
+              <Link to="/me" className='dropdown-item'><i className="bi bi-person-circle"></i> Account</Link>
+              <Link to="/me/myLoos" className='dropdown-item'><LiaToiletSolid /> Your Loos </Link>
               <NavDropdown.Divider />
-              <Button onClick={handleLogout} className='dropdown-item'>Logout</Button>
+              <Button onClick={handleLogout} className='dropdown-item'><i className="bi bi-box-arrow-right"></i> Logout</Button>
             </NavDropdown>) : ( <Spinner animation="grow" variant="success" />)}
 
           </Nav>
