@@ -6,7 +6,7 @@ import {
 } from "../actions/action";
 
 const initialState = {
-  myLoos: [],
+  newLoo: [],
   isLoading: false,
   isLoaded: false,
   isError: false,
@@ -23,7 +23,7 @@ const createLooReducer = (state = initialState, action) => {
     case CREATE_LOO:
       return {
         ...state,
-        myLoos: action.payload,
+        newLoo: action.payload,
         isLoading: false,
         isLoaded: true,
       };

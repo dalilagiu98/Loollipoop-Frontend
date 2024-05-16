@@ -8,6 +8,7 @@ export const CREATE_LOO_SUCCESS = "CREATE_LOO_SUCCESS";
 export const CREATE_LOO_FAILURE = "CREATE_LOO_FAILURE";
 export const RESET_LOADED = "RESET_LOADED";
 export const GET_LOCATION = "GET_LOCATION";
+export const GET_MY_LOO = "GET_MY_LOO";
 
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
@@ -140,6 +141,32 @@ export const fetchGetLocation = (inputValue) => {
         dispatch({ type: GET_LOCATION, payload: data });
       } else {
         throw new Error("Error in getting location");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchGetMyLoo = () => {
+  return async (dispatch) => {
+    const token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch("http://localhost:3001/loos/myLoos", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({
+          type: GET_MY_LOO,
+          payload: data,
+        });
+      } else {
+        throw new Error("Error in getting personal loo");
       }
     } catch (err) {
       console.log(err);

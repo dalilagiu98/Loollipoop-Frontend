@@ -226,7 +226,10 @@ const Profile = () => {
                 </Row>
             </Container>
             <Container className="mb-5">
-                <MyLoo />
+                { 
+                  roles.includes('HOST') && <MyLoo />
+                }
+                
             </Container>
             </>
             )}
