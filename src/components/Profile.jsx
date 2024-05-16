@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Modal } from "react-bootstrap"
+import { useMemo } from 'react';
+import { Container, Row, Col, Button, Modal, Spinner } from "react-bootstrap"
 import Badge from 'react-bootstrap/Badge';
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux"
@@ -12,6 +13,9 @@ import MyLoo from "./loos/MyLoo";
 
 
 const Profile = () => {
+
+    //VARIABLES:
+    const token = localStorage.getItem("accessToken")
 
     //STATE:
     //modals:
@@ -28,10 +32,13 @@ const Profile = () => {
         return state.getPersonalProfile.userLogged
     })
     const roles = useSelector((state) => {
-        return state.getPersonalProfile.userLogged.roles
+        return state.getPersonalProfile.userLogged.roles || [];
     })
     const rate = useSelector((state) => {
         return state.getPersonalProfile.userLogged.rate
+    })
+    const tokenState = useSelector((state) => {
+        return state.loginUser.token
     })
 
     //DISPATCH:
@@ -39,9 +46,15 @@ const Profile = () => {
 
     //EFFECT:
     useEffect(()=>{
-        dispatch(fetchPersonalProfile());
+        if(token) {
+            dispatch(fetchPersonalProfile());
+        }
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [tokenState])
+
+    //USEMEMO:
+    const memorizedRoles = useMemo(() => roles, [roles])
 
     //FUNCTIONS:
     //generate rate icons:
@@ -82,7 +95,9 @@ const Profile = () => {
 
     
     return (
-        <>
+        <>{
+            userLogged=== undefined ? (<Spinner animation="border" variant="primary"/> ) : 
+            (<>
             <Container className="h-100 mb-5" style={{marginTop: "4em"}}>
 
                 <Row className="mt-4 mb-3">
@@ -149,8 +164,8 @@ const Profile = () => {
                                     <h4 className="text-dark fw-bolder m-0">Roles:</h4>
                                 </div>
                                 <h2  className="mt-2">
-                                {
-                                    roles.map((role) => (                          
+                                {Array.isArray(memorizedRoles) &&
+                                    memorizedRoles.map((role) => (                          
                                         <Badge bg="primary" key={userLogged.id + role} className="me-2">{role}</Badge>                               
                                     ))                        
                                 }
@@ -213,6 +228,8 @@ const Profile = () => {
             <Container className="mb-5">
                 <MyLoo />
             </Container>
+            </>
+            )}
         </>
     )
 }

@@ -4,7 +4,6 @@ body {
   background:linear-gradient(180deg, #ffffff 0%, #FFFFE9 30%, #fbc2c8 70%, #fd8c9b 90%);
   background-repeat: no-repeat;
   background-size: cover;
-  flex-grow: 1;
 }
 
 .hovered-button {

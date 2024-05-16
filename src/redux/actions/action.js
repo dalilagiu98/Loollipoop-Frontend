@@ -3,6 +3,11 @@ export const LOGIN_USER = "LOGIN_USER";
 export const GET_PERSONAL_PROFILE = "GET_PERSONAL_PROFILE";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const CREATE_LOO = "CREATE_LOO";
+export const CREATE_LOO_REQUEST = "CREATE_LOO_REQUEST";
+export const CREATE_LOO_SUCCESS = "CREATE_LOO_SUCCESS";
+export const CREATE_LOO_FAILURE = "CREATE_LOO_FAILURE";
+export const RESET_LOADED = "RESET_LOADED";
+export const GET_LOCATION = "GET_LOCATION";
 
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
@@ -80,8 +85,9 @@ export const logoutAction = () => {
   };
 };
 
-export const fetchPersonalLoos = (loo) => {
+export const fetchCreateLoos = (loo) => {
   return async (dispatch) => {
+    dispatch({ type: CREATE_LOO_REQUEST });
     const body = JSON.stringify(loo);
     const token = localStorage.getItem("accessToken");
     try {
@@ -96,9 +102,44 @@ export const fetchPersonalLoos = (loo) => {
 
       if (response.ok) {
         let data = await response.json();
+        console.log(data);
         dispatch({ type: CREATE_LOO, payload: data });
       } else {
+        dispatch({ type: CREATE_LOO_FAILURE });
         throw new Error("Error in creation loo");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const resetLoadedLooCreated = () => {
+  return {
+    type: RESET_LOADED,
+  };
+};
+
+export const fetchGetLocation = (inputValue) => {
+  return async (dispatch) => {
+    const token = import.meta.env.VITE_API_TOKEN;
+    try {
+      let response = await fetch(
+        `/api/v1/forward?access_key=` +
+          token +
+          `&query=` +
+          inputValue +
+          `&country_module=1`,
+        {
+          method: "GET",
+        }
+      );
+
+      if (response.ok) {
+        let data = await response.json();
+        dispatch({ type: GET_LOCATION, payload: data });
+      } else {
+        throw new Error("Error in getting location");
       }
     } catch (err) {
       console.log(err);

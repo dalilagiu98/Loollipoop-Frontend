@@ -1,17 +1,24 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux"
 import { Col, Row, Container, Button } from "react-bootstrap"
 import { FaPlus } from "react-icons/fa";
 import AddingLooModal from "./AddingLooModal";
+import { resetLoadedLooCreated } from "../../redux/actions/action";
 
 const MyLoo = () => {
 
     //STATE:
     const [show, setShow] = useState(false)
 
+    //DISPATCH
+    const dispatch = useDispatch()
+
     //FUNCTIONS:
     const handleShow = () => setShow(true);
-    const handleClose = () => setShow(false);
-
+    const handleClose = () => {
+        setShow(false);
+        dispatch(resetLoadedLooCreated())
+    }
     return (
         <>
             <Row>
@@ -24,7 +31,7 @@ const MyLoo = () => {
                     <Container>
                         <Row>
                             <Col>
-                                <Button variant="outline-primary" className="hovered-button"><FaPlus style={{fontSize: "10em"}} onClick={handleShow}/></Button>
+                                <Button variant="outline-primary" className="hovered-button" style={{borderStyle: "dashed"}}><FaPlus style={{fontSize: "10em"}} onClick={handleShow}/></Button>
                                 {
                                     show && <AddingLooModal show={show} handleClose={handleClose}/>
                                 }
