@@ -11,6 +11,7 @@ import MyNav from "./components/MyNav"
 import Profile from "./components/Profile";
 import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
+import LooDetail from "./components/loos/LooDetail";
 
 function App() {
   return (
@@ -32,6 +33,13 @@ function App() {
           <Footer />
           </>
         } />
+        <Route path="/loo/:looId" element={
+          <>
+            <MyNav />
+            <LooDetail />
+            <Footer />
+          </> 
+        }/>
         <Route path="*" element={
           <>
           <MyNav />

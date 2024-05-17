@@ -6,9 +6,10 @@ export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGIN_USER_REQUEST = "LOGIN_USER_REQUEST";
 export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
+export const LOGOUT_USER = "LOGOUT_USER";
 
 export const GET_PERSONAL_PROFILE = "GET_PERSONAL_PROFILE";
-export const LOGOUT_USER = "LOGOUT_USER";
+
 export const CREATE_LOO = "CREATE_LOO";
 export const CREATE_LOO_REQUEST = "CREATE_LOO_REQUEST";
 export const CREATE_LOO_SUCCESS = "CREATE_LOO_SUCCESS";
@@ -16,6 +17,9 @@ export const CREATE_LOO_FAILURE = "CREATE_LOO_FAILURE";
 export const RESET_LOADED = "RESET_LOADED";
 export const GET_LOCATION = "GET_LOCATION";
 export const GET_MY_LOO = "GET_MY_LOO";
+
+export const GET_LOO_BY_ID = "GET_LOO_BY_ID";
+export const GET_LOO_BY_ID_REQUEST = "GET_LOO_BY_ID_REQUEST";
 
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
@@ -192,6 +196,30 @@ export const fetchGetMyLoo = () => {
         });
       } else {
         throw new Error("Error in getting personal loo");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchLooById = (looId) => {
+  return async (dispatch) => {
+    dispatch({ type: GET_LOO_BY_ID_REQUEST });
+    try {
+      let token = localStorage.getItem("accessToken");
+      const response = await fetch("http://localhost:3001/loos/" + looId, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: GET_LOO_BY_ID, payload: data });
+      } else {
+        throw new Error("Error in getting loo by id");
       }
     } catch (err) {
       console.log(err);

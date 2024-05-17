@@ -8,6 +8,7 @@ import { CiLocationOn } from "react-icons/ci";
 import AddingLooModal from "./AddingLooModal";
 import { fetchGetMyLoo, resetLoadedLooCreated } from "../../redux/actions/action";
 import Badge from 'react-bootstrap/Badge';
+import { Link } from "react-router-dom"
 
 const MyLoo = () => {
 
@@ -72,18 +73,20 @@ const MyLoo = () => {
                                 <Row className="gy-3">
                                 {myLoos.map((loo) => (
                                     <Col xs={12} md={4} key={loo.id} >
-                                        <Card className="h-100 border-0 shadow">
-                                        <Card.Img variant="top" src={loo.imageLoo} />
-                                        <Card.Body className="d-flex flex-column">
-                                        <Card.Title className="text-dark fw-bold fs-5">{loo.name}</Card.Title>
-                                        <Card.Text style={{fontSize: "0.9em"}} className="text-dark"><CiLocationOn />{loo.address}</Card.Text>
-                                        <Card.Text className="bg-tertiary rounded px-3 py-2 shadow-sm flex-grow-1 d-flex align-items-center justify-content-center ">{loo.description}</Card.Text>
-                                        <div className="d-flex justify-content-between ">
-                                            <Badge bg={loo.looState === "BUSY" ? ("primary") : ("dark")}>{loo.looState}</Badge>
-                                            <Card.Text>{generateRatingIcons(loo.rate)}</Card.Text>
-                                        </div>
-                                        </Card.Body>
-                                    </Card>
+                                        <Link to={"/loo/" + loo.id} style={{textDecoration: "none"}}>
+                                            <Card className="h-100 border-0 shadow">
+                                                <Card.Img variant="top" src={loo.imageLoo} />
+                                                <Card.Body className="d-flex flex-column">
+                                                <Card.Title className="text-dark fw-bold fs-5">{loo.name}</Card.Title>
+                                                <Card.Text style={{fontSize: "0.9em"}} className="text-dark"><CiLocationOn />{loo.address}</Card.Text>
+                                                <Card.Text className="bg-tertiary rounded px-3 py-2 shadow-sm flex-grow-1 d-flex align-items-center justify-content-center ">{loo.description}</Card.Text>
+                                                <div className="d-flex justify-content-between ">
+                                                    <Badge bg={loo.looState === "BUSY" ? ("primary") : ("dark")}>{loo.looState}</Badge>
+                                                    <Card.Text>{generateRatingIcons(loo.rate)}</Card.Text>
+                                                </div>
+                                                </Card.Body>
+                                            </Card>
+                                        </Link>
                                     </Col>   
                                 ))}
                                     <Col xs={12} md={4} className="d-flex align-items-center justify-content-center ">
