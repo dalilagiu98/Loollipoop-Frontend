@@ -1,8 +1,8 @@
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Spinner } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { useState } from 'react';
-import { useDispatch,  } from "react-redux";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector,  } from "react-redux";
 import { fetchLoginUser,  } from '../../redux/actions/action';
 import { Link, useNavigate } from "react-router-dom";
 
@@ -14,6 +14,20 @@ const Login = () => {
         password: ""
     });
 
+    //SELECTOR:
+    const isLoading = useSelector((state) => {
+        return state.loginUser.isLoading
+    })
+    const isLoaded = useSelector((state) => {
+        return state.loginUser.isLoaded
+    })
+    const isError = useSelector((state) => {
+        return state.loginUser.isError
+    })
+    const errorMessage = useSelector((state) => {
+        return state.loginUser.errorMessage
+    })
+
     //NAVIGATE:
     const navigate = useNavigate()
 
@@ -24,8 +38,16 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch(fetchLoginUser(form))
-        navigate("/")
     }
+
+    //EFFECT:
+    useEffect(() => {
+        if(isLoaded && !isError) {
+            navigate("/")
+        }
+    }, [isLoaded, isError, navigate])
+
+
     return(
         <>
             <Row>
@@ -66,8 +88,19 @@ const Login = () => {
                         })}
                         />
                     </InputGroup>
-
-                    <Button type='submit' className='rounded-pill w-100 border -success mt-5'>Entra!</Button>
+                    
+                    <div className="d-flex justify-content-center">
+                    {
+                        isLoading && <Spinner animation="border" variant="secondary"/>
+                    }
+                    {
+                        !isLoading && isLoaded && !isError &&  <h6 className="text-dark fw-medium">Uploaded!</h6>
+                    }
+                    {
+                        !isLoading && isError && <h6 className="text-secondary fw-medium">{errorMessage}</h6>
+                    }
+                    </div>    
+                    <Button type='submit' className='rounded-pill w-100 border -success mt-3'>Entra!</Button>
                 </Form>
             </Col>
         </Row>

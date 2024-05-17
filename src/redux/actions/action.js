@@ -1,7 +1,11 @@
 export const CREATE_USER = "CREATE_USER";
 export const CREATE_USER_REQUEST = "CREATE_USER_REQUEST";
 export const CREATE_USER_FAILURE = "CREATE_USER_FAILURE";
+
 export const LOGIN_USER = "LOGIN_USER";
+export const LOGIN_USER_REQUEST = "LOGIN_USER_REQUEST";
+export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
+
 export const GET_PERSONAL_PROFILE = "GET_PERSONAL_PROFILE";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const CREATE_LOO = "CREATE_LOO";
@@ -40,23 +44,30 @@ export const fetchCreateUser = (newUser) => {
 
 export const fetchLoginUser = (user) => {
   return async (dispatch) => {
+    dispatch({ type: LOGIN_USER_REQUEST });
     const body = JSON.stringify(user);
-    const response = await fetch("http://localhost:3001/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: body,
-    });
+    try {
+      const response = await fetch("http://localhost:3001/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      });
 
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
+      if (response.ok) {
+        const data = await response.json();
+
+        dispatch({ type: LOGIN_USER, payload: data });
+        localStorage.setItem("accessToken", data.accessToken);
+      } else {
+        const errorData = await response.json();
+        dispatch({ type: LOGIN_USER_FAILURE, payload: errorData });
+        throw new Error("Network response was not ok");
+      }
+    } catch (err) {
+      console.log(err);
     }
-
-    const data = await response.json();
-
-    dispatch({ type: LOGIN_USER, payload: data });
-    localStorage.setItem("accessToken", data.accessToken);
   };
 };
 
