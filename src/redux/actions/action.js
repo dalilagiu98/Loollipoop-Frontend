@@ -1,4 +1,6 @@
 export const CREATE_USER = "CREATE_USER";
+export const CREATE_USER_REQUEST = "CREATE_USER_REQUEST";
+export const CREATE_USER_FAILURE = "CREATE_USER_FAILURE";
 export const LOGIN_USER = "LOGIN_USER";
 export const GET_PERSONAL_PROFILE = "GET_PERSONAL_PROFILE";
 export const LOGOUT_USER = "LOGOUT_USER";
@@ -12,22 +14,27 @@ export const GET_MY_LOO = "GET_MY_LOO";
 
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
+    dispatch({ type: CREATE_USER_REQUEST });
     const body = JSON.stringify(newUser);
-    const response = await fetch("http://localhost:3001/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: body,
-    });
+    try {
+      const response = await fetch("http://localhost:3001/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      });
 
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CREATE_USER, payload: data });
+      } else {
+        dispatch({ type: CREATE_USER_FAILURE });
+        throw new Error("Network response was not ok");
+      }
+    } catch (err) {
+      console.log(err);
     }
-
-    const data = await response.json();
-
-    dispatch({ type: CREATE_USER, payload: data });
   };
 };
 
@@ -105,6 +112,7 @@ export const fetchCreateLoos = (loo) => {
         let data = await response.json();
         console.log(data);
         dispatch({ type: CREATE_LOO, payload: data });
+        dispatch({ type: CREATE_LOO_SUCCESS });
       } else {
         dispatch({ type: CREATE_LOO_FAILURE });
         throw new Error("Error in creation loo");

@@ -2,6 +2,7 @@ import {
   CREATE_LOO,
   CREATE_LOO_FAILURE,
   CREATE_LOO_REQUEST,
+  CREATE_LOO_SUCCESS,
   RESET_LOADED,
 } from "../actions/action";
 
@@ -24,10 +25,13 @@ const createLooReducer = (state = initialState, action) => {
       return {
         ...state,
         newLoo: action.payload,
+      };
+    case CREATE_LOO_SUCCESS:
+      return {
+        ...state,
         isLoading: false,
         isLoaded: true,
       };
-
     case CREATE_LOO_FAILURE:
       return {
         ...state,
