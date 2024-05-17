@@ -100,7 +100,7 @@ const Login = () => {
                         !isLoading && isError && <h6 className="text-secondary fw-medium">{errorMessage}</h6>
                     }
                     </div>    
-                    <Button type='submit' className='rounded-pill w-100 border -success mt-3'>Entra!</Button>
+                    <Button type='submit' className='rounded-pill w-100 border -success mt-3'>Sign in!</Button>
                 </Form>
             </Col>
         </Row>

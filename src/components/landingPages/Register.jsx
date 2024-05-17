@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import Alert from 'react-bootstrap/Alert';
 import { Row, Col, Button, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { fetchCreateUser } from '../../redux/actions/action';
+import { actionCreateUserSuccess, fetchCreateUser } from '../../redux/actions/action';
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = function () {
@@ -17,8 +16,6 @@ const Register = function () {
         password: ""
     });
 
-    const [errorPassword, setErrorPassword] = useState("")
-
     //SELECTOR:
     const isLoading = useSelector((state) => {
         return state.createUser.isLoading
@@ -29,6 +26,9 @@ const Register = function () {
     const isError = useSelector((state) => {
         return state.createUser.isError
     })
+    const errorMessage = useSelector((state) => {
+        return state.createUser.errorMessage
+    })
 
     //NAVIGATE:
     const navigate = useNavigate()
@@ -37,6 +37,7 @@ const Register = function () {
     useEffect(() => {
         if(isLoaded && !isError) {
             navigate("/login")
+            dispatch(actionCreateUserSuccess())
         }
     }, [isLoaded, isError, navigate])
 
@@ -45,26 +46,9 @@ const Register = function () {
     const dispatch = useDispatch();
 
     //FUNCTIONS:
-    const handlePasswordChange = (e) => {
-        const password = e.target.value;
-            setForm({
-                ...form,
-                password: password
-            })
-            if (password.length < 8) {
-                setErrorPassword('Password must be at least 8 characters long');
-            } else {
-                setErrorPassword('');
-            }
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (form.password.length < 8) {
-            setErrorPassword('Password must be at least 8 characters long');
-            return;
-        }
 
         dispatch(
             fetchCreateUser(form)
@@ -113,7 +97,7 @@ const Register = function () {
                     </InputGroup>
                     <div className="d-flex justify-content-center mb-2">
                     {
-                        !isLoading && isError && <h6 className="text-secondary fw-medium">Problem with email, please choose another one. </h6>
+                        !isLoading && isError && <h6 className="text-secondary fw-medium">{errorMessage}</h6>
                     }
                     </div>
                     <InputGroup className="mb-3">
@@ -137,10 +121,12 @@ const Register = function () {
                         placeholder="Password..."
                         aria-label="Password..."
                         value={form.password}
-                        onChange={handlePasswordChange}
+                        onChange={(e) => setForm({
+                            ...form,
+                            password: e.target.value
+                        })}
                         />
                     </InputGroup>
-                    {errorPassword &&  <Alert variant="secondary">{errorPassword}</Alert> }
 
                     <div className="d-flex justify-content-center">
                     {

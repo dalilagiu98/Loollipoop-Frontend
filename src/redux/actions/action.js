@@ -1,6 +1,7 @@
 export const CREATE_USER = "CREATE_USER";
 export const CREATE_USER_REQUEST = "CREATE_USER_REQUEST";
 export const CREATE_USER_FAILURE = "CREATE_USER_FAILURE";
+export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
 
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGIN_USER_REQUEST = "LOGIN_USER_REQUEST";
@@ -33,13 +34,18 @@ export const fetchCreateUser = (newUser) => {
         const data = await response.json();
         dispatch({ type: CREATE_USER, payload: data });
       } else {
-        dispatch({ type: CREATE_USER_FAILURE });
+        const errorData = await response.json();
+        dispatch({ type: CREATE_USER_FAILURE, payload: errorData });
         throw new Error("Network response was not ok");
       }
     } catch (err) {
       console.log(err);
     }
   };
+};
+
+export const actionCreateUserSuccess = () => {
+  return { type: CREATE_USER_SUCCESS };
 };
 
 export const fetchLoginUser = (user) => {
