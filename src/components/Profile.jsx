@@ -128,7 +128,7 @@ const Profile = () => {
                                 }
                                 {
                                     show && (
-                                    <Modal show={show} onHide={handleClose} animation={false} className="border border-primary">
+                                    <Modal show={show} onHide={handleClose} animation={false} >
                                         <Modal.Header className="bg-tertiary mb-3 border border-primary">
                                         <Modal.Title className="text-dark display-6">Upload image profile</Modal.Title>
                                         </Modal.Header>

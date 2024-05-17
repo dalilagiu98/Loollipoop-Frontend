@@ -20,6 +20,12 @@ export const GET_MY_LOO = "GET_MY_LOO";
 
 export const GET_LOO_BY_ID = "GET_LOO_BY_ID";
 export const GET_LOO_BY_ID_REQUEST = "GET_LOO_BY_ID_REQUEST";
+export const CHANGE_LOO_STATE = "CHANGE_LOO_STATE";
+export const CHANGE_LOO_IMAGE = "CHANGE_LOO_IMAGE";
+export const CHANGE_LOO_IMAGE_REQUEST = "CHANGE_LOO_IMAGE_REQUEST";
+export const CHANGE_LOO_IMAGE_FAILURE = "CHANGE_LOO_IMAGE_FAILURE";
+
+let token = localStorage.getItem("accessToken");
 
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
@@ -84,7 +90,6 @@ export const fetchLoginUser = (user) => {
 export const fetchPersonalProfile = () => {
   return async (dispatch) => {
     try {
-      let token = localStorage.getItem("accessToken");
       const response = await fetch("http://localhost:3001/users/me", {
         method: "GET",
         headers: {
@@ -118,7 +123,6 @@ export const fetchCreateLoos = (loo) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_LOO_REQUEST });
     const body = JSON.stringify(loo);
-    const token = localStorage.getItem("accessToken");
     try {
       let response = await fetch("http://localhost:3001/users/me/loos", {
         method: "POST",
@@ -179,7 +183,6 @@ export const fetchGetLocation = (inputValue) => {
 
 export const fetchGetMyLoo = () => {
   return async (dispatch) => {
-    const token = localStorage.getItem("accessToken");
     try {
       let response = await fetch("http://localhost:3001/loos/myLoos", {
         method: "GET",
@@ -207,7 +210,6 @@ export const fetchLooById = (looId) => {
   return async (dispatch) => {
     dispatch({ type: GET_LOO_BY_ID_REQUEST });
     try {
-      let token = localStorage.getItem("accessToken");
       const response = await fetch("http://localhost:3001/loos/" + looId, {
         method: "GET",
         headers: {
@@ -220,6 +222,61 @@ export const fetchLooById = (looId) => {
         dispatch({ type: GET_LOO_BY_ID, payload: data });
       } else {
         throw new Error("Error in getting loo by id");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchChangeLooState = (looId) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(
+        "http://localhost:3001/loos/myLoos/" + looId + "/changeState",
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CHANGE_LOO_STATE, payload: data });
+      } else {
+        throw new Error("Error in changing loo state");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchChangeLooImage = (looId, file) => {
+  return async (dispatch) => {
+    dispatch({ type: CHANGE_LOO_IMAGE_REQUEST });
+    let formData = new FormData();
+    formData.append("looImage", file);
+    try {
+      let response = await fetch(
+        "http://localhost:3001/loos/myLoos/" + looId + "/looImage",
+        {
+          method: "PATCH",
+          body: formData,
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CHANGE_LOO_IMAGE, payload: data });
+      } else {
+        const errorData = await response.json();
+        dispatch({ type: CHANGE_LOO_IMAGE_FAILURE, payload: errorData });
       }
     } catch (err) {
       console.log(err);

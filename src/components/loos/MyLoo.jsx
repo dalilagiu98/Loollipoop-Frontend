@@ -81,7 +81,7 @@ const MyLoo = () => {
                                                 <Card.Text style={{fontSize: "0.9em"}} className="text-dark"><CiLocationOn />{loo.address}</Card.Text>
                                                 <Card.Text className="bg-tertiary rounded px-3 py-2 shadow-sm flex-grow-1 d-flex align-items-center justify-content-center ">{loo.description}</Card.Text>
                                                 <div className="d-flex justify-content-between ">
-                                                    <Badge bg={loo.looState === "BUSY" ? ("primary") : ("dark")}>{loo.looState}</Badge>
+                                                    <Badge bg={loo.looState === "BUSY" ? ("tertiary text-primary") : ("dark")}>{loo.looState}</Badge>
                                                     <Card.Text>{generateRatingIcons(loo.rate)}</Card.Text>
                                                 </div>
                                                 </Card.Body>
