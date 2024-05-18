@@ -6,6 +6,7 @@ import createLooReducer from "../reducers/createLoo";
 import getLocationReducer from "../reducers/getLocation";
 import getPersonalLooReducer from "../reducers/getPersonalLoo";
 import getLooByIdReducer from "../reducers/getLooById";
+import getNearbyLooReducer from "../reducers/getNearbyLoo";
 
 const mainReducer = combineReducers({
   createUser: createUserReducer,
@@ -15,6 +16,7 @@ const mainReducer = combineReducers({
   getLocation: getLocationReducer,
   getPersonalLoo: getPersonalLooReducer,
   getLooById: getLooByIdReducer,
+  getNearbyLoo: getNearbyLooReducer,
 });
 
 const store = configureStore({

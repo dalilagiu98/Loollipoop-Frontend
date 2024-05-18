@@ -19,6 +19,8 @@ const createLooReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        isError: false,
+        isLoaded: false,
       };
 
     case CREATE_LOO:

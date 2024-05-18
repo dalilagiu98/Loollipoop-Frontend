@@ -51,7 +51,7 @@ const tokenLocalStorage = localStorage.getItem("accessToken")
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link className='text-white fw-medium'>Search by address</Nav.Link>
-            <Nav.Link className='text-white fw-medium'>Search by position</Nav.Link>
+            <Link to="/searchByPosition" className='text-white fw-medium nav-link'>Search by position</Link>
 
           </Nav>
           

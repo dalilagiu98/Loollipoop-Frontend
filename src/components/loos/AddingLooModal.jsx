@@ -44,7 +44,6 @@ const AddingLooModal = ({ show, handleClose}) => {
     const idNewLoo = useSelector((state) => {
         return state.createLoo.newLoo.id
     })
-    console.log(idNewLoo)
     //DISPATCH:
     const dispatch = useDispatch()
 
@@ -157,7 +156,7 @@ const AddingLooModal = ({ show, handleClose}) => {
                     value={form.address}
                     onChange={handleInputChange}
                     />
-                    <ListGroup className='position-absolute' style={{ top: "32%",width: "94%"}}>
+                    <ListGroup className='position-absolute' style={{ top: "50%",width: "94%"}}>
                     {
                         showDropdown && resultsResearch && resultsResearch.map((result) => (
                             <ListGroup.Item className='d-flex' key={result.longitude + "-" + result.latitude } onClick={() => handleClick(result)}>{result.label}</ListGroup.Item>

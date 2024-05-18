@@ -39,6 +39,7 @@ const Register = function () {
             navigate("/login")
             dispatch(actionCreateUserSuccess())
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoaded, isError, navigate])
 
 

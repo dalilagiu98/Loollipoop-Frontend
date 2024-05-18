@@ -28,7 +28,7 @@ export const CHANGE_LOO_DETAILS = "CHANGE_LOO_DETAILS";
 export const CHANGE_LOO_DETAILS_REQUEST = "CHANGE_LOO_DETAILS_REQUEST";
 export const CHANGE_LOO_DETAILS_FAILURE = "CHANGE_LOO_DETAILS_FAILURE";
 
-let token = localStorage.getItem("accessToken");
+export const GET_NEARBY_LOO = "GET_NEARBY_LOO";
 
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
@@ -92,6 +92,7 @@ export const fetchLoginUser = (user) => {
 
 export const fetchPersonalProfile = () => {
   return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
     try {
       const response = await fetch("http://localhost:3001/users/me", {
         method: "GET",
@@ -126,6 +127,7 @@ export const fetchCreateLoos = (loo) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_LOO_REQUEST });
     const body = JSON.stringify(loo);
+    let token = localStorage.getItem("accessToken");
     try {
       let response = await fetch("http://localhost:3001/users/me/loos", {
         method: "POST",
@@ -186,6 +188,7 @@ export const fetchGetLocation = (inputValue) => {
 
 export const fetchGetMyLoo = () => {
   return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
     try {
       let response = await fetch("http://localhost:3001/loos/myLoos", {
         method: "GET",
@@ -212,6 +215,7 @@ export const fetchGetMyLoo = () => {
 export const fetchLooById = (looId) => {
   return async (dispatch) => {
     dispatch({ type: GET_LOO_BY_ID_REQUEST });
+    let token = localStorage.getItem("accessToken");
     try {
       const response = await fetch("http://localhost:3001/loos/" + looId, {
         method: "GET",
@@ -234,6 +238,7 @@ export const fetchLooById = (looId) => {
 
 export const fetchChangeLooState = (looId) => {
   return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
     try {
       const response = await fetch(
         "http://localhost:3001/loos/myLoos/" + looId + "/changeState",
@@ -259,6 +264,7 @@ export const fetchChangeLooState = (looId) => {
 
 export const fetchChangeLooImage = (looId, file) => {
   return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
     dispatch({ type: CHANGE_LOO_IMAGE_REQUEST });
     let formData = new FormData();
     formData.append("looImage", file);
@@ -289,6 +295,7 @@ export const fetchChangeLooImage = (looId, file) => {
 
 export const fetchChangeLooDetails = (looId, updatedLoo) => {
   return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
     const body = JSON.stringify(updatedLoo);
     dispatch({ type: CHANGE_LOO_DETAILS_REQUEST });
     try {
@@ -309,6 +316,37 @@ export const fetchChangeLooDetails = (looId, updatedLoo) => {
         dispatch({ type: CHANGE_LOO_DETAILS, payload: data });
       } else {
         dispatch({ type: CHANGE_LOO_DETAILS_FAILURE });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchGetNearbyLoo = (latPrefix, longPrefix) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch(
+        "http://localhost:3001/loos/searchByPosition?latPrefix=" +
+          latPrefix +
+          "&longPrefix=" +
+          longPrefix,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("loos nearby fetch: " + JSON.stringify(data));
+        dispatch({ type: GET_NEARBY_LOO, payload: data });
+      } else {
+        throw new Error("No loos found nearby current position");
       }
     } catch (err) {
       console.log(err);

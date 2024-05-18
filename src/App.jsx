@@ -1,6 +1,7 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import "../src/sass/main.css";
+import "leaflet/dist/leaflet.css"
 import "typeface-montserrat";
 import "./App.css";
 import BubblesWelcome from "./components/landingPages/BubblesWelcome"
@@ -12,6 +13,7 @@ import Profile from "./components/Profile";
 import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
 import LooDetail from "./components/loos/LooDetail";
+import SearchByPosition from "./components/searchPages/SearchByPosition";
 
 function App() {
   return (
@@ -40,6 +42,13 @@ function App() {
             <Footer />
           </> 
         }/>
+        <Route path="/searchByPosition" element={
+          <>
+            <MyNav />
+            <SearchByPosition />
+            <Footer />
+          </>
+        } />
         <Route path="*" element={
           <>
           <MyNav />
