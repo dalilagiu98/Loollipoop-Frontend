@@ -107,7 +107,7 @@ const AddingLooModal = ({ show, handleClose}) => {
     }
 
 
-    //USEEFFECT:
+    //EFFECT:
     useEffect(() => {
         const handler = setTimeout(() => {
             if (form.address && form.address.trim()) {

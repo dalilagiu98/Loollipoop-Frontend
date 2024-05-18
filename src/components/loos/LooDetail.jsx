@@ -33,8 +33,7 @@ const LooDetail = () => {
     const handleCloseImage = () => setShowImage(false);
 
     const handleShowDetails = () => setShowDetails(true);
-    const handleCloseDetails = () => setIsHoveredDetails(false);
-
+    const handleCloseDetails = () => setShowDetails(false);
     //EFFECT:
     useEffect(() => {
         dispatch(fetchLooById(params.looId))
@@ -104,7 +103,7 @@ const LooDetail = () => {
                             isHoveredDetails && <i onClick={handleShowDetails} className="bi bi-pencil-fill fs-4 btn rounded-circle position-absolute btn-outline-dark border-0 hovered-button" style={{top: "0", left: "0"}}></i>
                         }
                         {
-                            showDetails && <ChangeLooDetailModal handleClose={handleCloseDetails} show={showDetails} />
+                            showDetails && <ChangeLooDetailModal handleCloseDetail={handleCloseDetails} show={showDetails} />
                         }
                         <h1 className="text-dark fw-medium">{looFound.name}</h1>
                         <h5 className="fw-light text-dark"><CiLocationOn className="fs-4"/>{looFound.address}</h5>

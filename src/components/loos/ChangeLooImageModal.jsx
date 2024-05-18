@@ -20,19 +20,15 @@ const ChangeLooImageModal = ({ handleClose, show, params}) => {
     const isLoading = useSelector((state) => {
         return state.getLooById.isLoadingImage
     })
-    console.log("isLoading: " + isLoading)
     const isLoaded = useSelector((state) => {
         return state.getLooById.isLoadedImage
     })
-    console.log("isLoaded: " + isLoaded)
     const isError = useSelector((state) => {
         return state.getLooById.isErrorImage
     })
-    console.log("isError: " + isError)
     const errorMessage = useSelector((state) => {
         return state.getLooById.errorMessageImage
     })
-    console.log("errorMessage: " + errorMessage)
 
     //DISPATCH:
     const dispatch = useDispatch()
@@ -85,10 +81,9 @@ const ChangeLooImageModal = ({ handleClose, show, params}) => {
         </Modal.Body>
 
         <Modal.Footer className="d-flex justify-content-evenly">
+            <Button onClick={handleUpload} className=" text-secondary border border-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm" >Upload</Button>
 
-            <Button onClick={handleUpload} className="text-primary border border-primary fs-5 fw-medium rounded-pill px-4 shadow-sm" variant="secondary" >Upload</Button>
-
-            <Button onClick={handleClose} className=" text-secondary border border-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm" >Close</Button>
+            <Button onClick={handleClose} className="text-primary border border-primary fs-5 fw-medium rounded-pill px-4 shadow-sm" variant="secondary">Close</Button>
         </Modal.Footer>
       </Modal>
     )

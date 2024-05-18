@@ -24,6 +24,9 @@ export const CHANGE_LOO_STATE = "CHANGE_LOO_STATE";
 export const CHANGE_LOO_IMAGE = "CHANGE_LOO_IMAGE";
 export const CHANGE_LOO_IMAGE_REQUEST = "CHANGE_LOO_IMAGE_REQUEST";
 export const CHANGE_LOO_IMAGE_FAILURE = "CHANGE_LOO_IMAGE_FAILURE";
+export const CHANGE_LOO_DETAILS = "CHANGE_LOO_DETAILS";
+export const CHANGE_LOO_DETAILS_REQUEST = "CHANGE_LOO_DETAILS_REQUEST";
+export const CHANGE_LOO_DETAILS_FAILURE = "CHANGE_LOO_DETAILS_FAILURE";
 
 let token = localStorage.getItem("accessToken");
 
@@ -277,6 +280,35 @@ export const fetchChangeLooImage = (looId, file) => {
       } else {
         const errorData = await response.json();
         dispatch({ type: CHANGE_LOO_IMAGE_FAILURE, payload: errorData });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchChangeLooDetails = (looId, updatedLoo) => {
+  return async (dispatch) => {
+    const body = JSON.stringify(updatedLoo);
+    dispatch({ type: CHANGE_LOO_DETAILS_REQUEST });
+    try {
+      let response = await fetch(
+        "http://localhost:3001/loos/myLoos/" + looId + "/details",
+        {
+          method: "PUT",
+          body: body,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CHANGE_LOO_DETAILS, payload: data });
+      } else {
+        dispatch({ type: CHANGE_LOO_DETAILS_FAILURE });
       }
     } catch (err) {
       console.log(err);
