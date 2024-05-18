@@ -6,7 +6,7 @@ import { FaPlus } from "react-icons/fa";
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
 import AddingLooModal from "./AddingLooModal";
-import { fetchGetMyLoo, resetLoadedLooCreated } from "../../redux/actions/action";
+import { fetchDeleteLoo, fetchGetMyLoo, resetLoadedLooCreated } from "../../redux/actions/action";
 import Badge from 'react-bootstrap/Badge';
 import { Link } from "react-router-dom"
 
@@ -14,6 +14,7 @@ const MyLoo = () => {
 
     //STATE:
     const [show, setShow] = useState(false)
+    const [hoveredCardId, setHoveredCardId] = useState(null)
 
     //SELECTOR:
     const myLoos = useSelector((state) => {
@@ -55,7 +56,7 @@ const MyLoo = () => {
     useEffect(() => {
         dispatch(fetchGetMyLoo())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [dispatch])
 
 
     return (
@@ -71,22 +72,27 @@ const MyLoo = () => {
                         {
                             myLoos.length > 0 ? (
                                 <Row className="gy-3">
-                                {myLoos.map((loo) => (
-                                    <Col xs={12} md={4} key={loo.id} >
-                                        <Link to={"/loo/" + loo.id} style={{textDecoration: "none"}}>
-                                            <Card className="h-100 border-0 shadow">
+                                {myLoos.map((loo, i) => (
+                                    <Col xs={12} md={4} key={i} >
+                                        <Card className="h-100 border-0 shadow position-relative" onMouseEnter={() => setHoveredCardId(loo.id)} onMouseLeave={() => setHoveredCardId(null)}>
+
+                                            {hoveredCardId === loo.id && <Button className="position-absolute rounded-circle hovered-button" style={{top: "5px", left: "5px"}} onClick={() => {
+                                                    dispatch(fetchDeleteLoo(loo.id, i))
+                                                }}><i className="bi bi-trash3"></i></Button>}
+
+                                            <Link to={"/loo/" + loo.id} style={{textDecoration: "none"}}>
                                                 <Card.Img variant="top" src={loo.imageLoo} />
                                                 <Card.Body className="d-flex flex-column">
                                                 <Card.Title className="text-dark fw-bold fs-5">{loo.name}</Card.Title>
                                                 <Card.Text style={{fontSize: "0.9em"}} className="text-dark"><CiLocationOn />{loo.address}</Card.Text>
-                                                <Card.Text className="bg-tertiary rounded px-3 py-2 shadow-sm flex-grow-1 d-flex align-items-center justify-content-center ">{loo.description}</Card.Text>
+                                                <Card.Text className="bg-tertiary rounded px-3 py-2 shadow-sm flex-grow-1 d-flex align-items-center justify-content-center text-black ">{loo.description}</Card.Text>
                                                 <div className="d-flex justify-content-between ">
                                                     <Badge bg={loo.looState === "BUSY" ? ("tertiary text-primary") : ("dark")}>{loo.looState}</Badge>
                                                     <Card.Text>{generateRatingIcons(loo.rate)}</Card.Text>
                                                 </div>
-                                                </Card.Body>
-                                            </Card>
-                                        </Link>
+                                               </Card.Body>
+                                            </Link>
+                                        </Card>
                                     </Col>   
                                 ))}
                                     <Col xs={12} md={4} className="d-flex align-items-center justify-content-center ">

@@ -17,6 +17,7 @@ export const CREATE_LOO_FAILURE = "CREATE_LOO_FAILURE";
 export const RESET_LOADED = "RESET_LOADED";
 export const GET_LOCATION = "GET_LOCATION";
 export const GET_MY_LOO = "GET_MY_LOO";
+export const DELETE_LOO = "DELETE_LOO";
 
 export const GET_LOO_BY_ID = "GET_LOO_BY_ID";
 export const GET_LOO_BY_ID_REQUEST = "GET_LOO_BY_ID_REQUEST";
@@ -205,6 +206,28 @@ export const fetchGetMyLoo = () => {
         });
       } else {
         throw new Error("Error in getting personal loo");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchDeleteLoo = (looId) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch("http://localhost:3001/loos/myLoos/" + looId, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      if (response.ok) {
+        dispatch({ type: DELETE_LOO, payload: looId });
+      } else {
+        throw new Error("Error in delete loo");
       }
     } catch (err) {
       console.log(err);
