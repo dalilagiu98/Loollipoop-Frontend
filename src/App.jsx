@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
 import LooDetail from "./components/loos/LooDetail";
 import SearchByPosition from "./components/searchPages/SearchByPosition";
+import Settings from "./components/settings/Settings";
 
 function App() {
   return (
@@ -33,6 +34,13 @@ function App() {
           <MyNav />
           <Profile />
           <Footer />
+          </>
+        } />
+        <Route path="/settings" element={
+          <>
+           <MyNav />
+           <Settings />
+           <Footer />
           </>
         } />
         <Route path="/loo/:looId" element={

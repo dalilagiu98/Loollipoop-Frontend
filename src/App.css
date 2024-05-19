@@ -13,3 +13,14 @@ body {
 .hovered-button:hover {
   color: #FFFFE9
 }
+
+.radio-label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Stile per l'elemento interno del radio button selezionato */

@@ -124,6 +124,28 @@ export const logoutAction = () => {
   };
 };
 
+export const fetchDeleteUser = () => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch("http://localhost:3001/users/me", {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      if (response.ok) {
+        dispatch({ type: LOGOUT_USER });
+      } else {
+        throw new Error("Error in delete user");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export const fetchCreateLoos = (loo) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_LOO_REQUEST });

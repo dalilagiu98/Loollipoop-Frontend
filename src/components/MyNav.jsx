@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
-import { LiaToiletSolid } from "react-icons/lia";
+import { IoSettingsOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
 import { logoutAction } from '../redux/actions/action';
@@ -61,7 +61,7 @@ const tokenLocalStorage = localStorage.getItem("accessToken")
                 <img src={avatarImage} alt='logo' style={{width: "40px", height:"40px", objectFit: "cover"}} className='rounded-circle'/>
             } id="collapsible-nav-dropdown" className='dropstart'>
               <Link to="/me" className='dropdown-item'><i className="bi bi-person-circle"></i> Account</Link>
-              <Link to="/me/myLoos" className='dropdown-item'><LiaToiletSolid /> Your Loos </Link>
+              <Link to="/settings" className='dropdown-item d-flex align-items-center'><IoSettingsOutline className='me-1'/>Settings </Link>
               <NavDropdown.Divider />
               <Button onClick={handleLogout} className='dropdown-item'><i className="bi bi-box-arrow-right"></i> Logout</Button>
             </NavDropdown>) : ( <Spinner animation="grow" variant="success" />)}
