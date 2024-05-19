@@ -1,4 +1,10 @@
+/* html {
+  height: 100%;
+} */
 
+#root {
+  height: 100%;
+}
 body {
   height: 100%;
   background:linear-gradient(180deg, #ffffff 0%, #FFFFE9 30%, #fbc2c8 70%, #fd8c9b 90%);

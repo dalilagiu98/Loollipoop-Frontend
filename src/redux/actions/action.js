@@ -30,6 +30,9 @@ export const CHANGE_LOO_DETAILS_REQUEST = "CHANGE_LOO_DETAILS_REQUEST";
 export const CHANGE_LOO_DETAILS_FAILURE = "CHANGE_LOO_DETAILS_FAILURE";
 
 export const GET_NEARBY_LOO = "GET_NEARBY_LOO";
+export const GET_LOO_BY_ADDRESS_REQUEST = "GET_LOO_BY_ADDRESS_REQUEST";
+export const GET_LOO_BY_ADDRESS = "GET_LOO_BY_ADDRESS";
+export const GET_LOO_BY_ADDRESS_FAILURE = "GET_LOO_BY_ADDRESS_FAILURE";
 
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
@@ -392,6 +395,34 @@ export const fetchGetNearbyLoo = (latPrefix, longPrefix) => {
         dispatch({ type: GET_NEARBY_LOO, payload: data });
       } else {
         throw new Error("No loos found nearby current position");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchGetLooByAddress = (address) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    dispatch({ type: GET_LOO_BY_ADDRESS_REQUEST });
+    try {
+      let response = await fetch(
+        "http://localhost:3001/loos/searchByAddress?address=" + address,
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: GET_LOO_BY_ADDRESS, payload: data });
+      } else {
+        dispatch({ type: GET_LOO_BY_ADDRESS_FAILURE });
+        throw new Error("Error in getting loo by address");
       }
     } catch (err) {
       console.log(err);

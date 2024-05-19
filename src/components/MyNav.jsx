@@ -45,14 +45,14 @@ const tokenLocalStorage = localStorage.getItem("accessToken")
     <Navbar collapseOnSelect expand="md" className="bg-dark py-0 position-fixed top-0 end-0 start-0 z-3">
       <Container fluid>
         <Link to="/" className='navbar-brand'>
-          <img src='logo.png' alt='logo' style={{height: '2em'}}/>
+          <img src='/logo.png' alt='logo' style={{height: '2em'}}/>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link className='text-white fw-medium'>Search by address</Nav.Link>
-            <Link to="/searchByPosition" className='text-white fw-medium nav-link'>Search by position</Link>
 
+          <Nav className="me-auto">
+            <Link to="/searchByAddress" className='text-white fw-medium nav-link'>Search by address</Link>
+            <Link to="/searchByPosition" className='text-white fw-medium nav-link'>Search by position</Link>
           </Nav>
           
           <Nav>

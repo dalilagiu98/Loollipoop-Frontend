@@ -10,7 +10,7 @@ const Footer = () => {
             <Row className="justify-content-around py-4 mt-4">
                 <Col className="h-100">
                     <div className="d-flex justify-content-center align-items-center">
-                        <img src="logoname.png" alt="logo-name" style={{height: "5em"}}/>
+                        <img src="/logoname.png" alt="logo-name" style={{height: "5em"}}/>
                     </div>
                 </Col>
 
@@ -39,7 +39,7 @@ const Footer = () => {
                         <Button variant="outline-dark border-0 rounded-circle" href="https://www.linkedin.com/in/dalilagiurgola/" className="hovered-button">
                             <FaLinkedinIn className="fs-1"/>
                         </Button>
-                        <Button variant="outline-dark border-0 rounded-circle" href="https://discord.com/channels/@me" className="hovered-button">
+                        <Button variant="outline-dark border-0 rounded-circle" href="discordapp.com/users/781926772525629460" className="hovered-button">
                             <FaDiscord className="fs-1"/>   
                         </Button>
                     </div>

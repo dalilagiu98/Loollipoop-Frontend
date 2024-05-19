@@ -17,10 +17,11 @@ const LooDetail = () => {
     const [showImage, setShowImage] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
 
-        //SELECTOR:
+    //SELECTOR:
     const looFound = useSelector((state) => {
         return state.getLooById.looFound
     })
+    const idUser = useSelector((state) => state.getPersonalProfile.userLogged.id)
 
     //DISPATCH:
     const dispatch = useDispatch()
@@ -73,7 +74,7 @@ const LooDetail = () => {
                 <div className="p-3 bg-tertiary rounded my-4 shadow-sm " onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
                     <div className="position-relative">
                         <img src={looFound.imageLoo} alt="loo-image" style={{maxWidth: "30em"}} className="rounded shadow "/> 
-                        {isHovered && 
+                        {isHovered &&  looFound.owner.id === idUser &&  
                         (<div className="w-100 h-100 rounded" style={{
                             backgroundColor: "rgba(0, 0, 0, 0.2)",
                             position: "absolute",
@@ -100,7 +101,7 @@ const LooDetail = () => {
                 <Col xs={12} lg ={6}>
                     <div className="mt-5 text-end me-2 mb-3 position-relative d-flex flex-column h-75" onMouseEnter={() => setIsHoveredDetails(true)} onMouseLeave={() => setIsHoveredDetails(false)}> 
                         {
-                            isHoveredDetails && <i onClick={handleShowDetails} className="bi bi-pencil-fill fs-4 btn rounded-circle position-absolute btn-outline-dark border-0 hovered-button" style={{top: "0", left: "0"}}></i>
+                            isHoveredDetails &&  looFound.owner.id === idUser &&  <i onClick={handleShowDetails} className="bi bi-pencil-fill fs-4 btn rounded-circle position-absolute btn-outline-dark border-0 hovered-button" style={{top: "0", left: "0"}}></i>
                         }
                         {
                             showDetails && <ChangeLooDetailModal handleCloseDetail={handleCloseDetails} show={showDetails} />
@@ -117,7 +118,12 @@ const LooDetail = () => {
 
                         <div className="d-flex justify-content-between mt-5">
                             <Badge bg={looFound.looState === "BUSY" ? ("tertiary text-primary") : ("dark")}><h5 className="m-0 p-0">{looFound.looState}</h5></Badge>
-                            <Button className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm " onClick={handleChangeState}>Change state</Button>
+                            {
+                                looFound.owner.id === idUser &&                             <Button className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm " onClick={handleChangeState}>Change state</Button>
+                            }
+                            {
+                                looFound.owner.id !== idUser &&                             <Button className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm ">Book</Button>
+                            }
                         </div>
                     </div>   
                 </Col>

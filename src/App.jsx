@@ -15,6 +15,7 @@ import NotFound from "./components/NotFound";
 import LooDetail from "./components/loos/LooDetail";
 import SearchByPosition from "./components/searchPages/SearchByPosition";
 import Settings from "./components/settings/Settings";
+import SearchByAddress from "./components/searchPages/SearchByAddress";
 
 function App() {
   return (
@@ -56,6 +57,15 @@ function App() {
             <SearchByPosition />
             <Footer />
           </>
+        } />
+        <Route path="/searchByAddress" element = {
+          <div className="d-flex flex-column h-100">
+            <MyNav />
+            <div className="flex-grow-1">
+              <SearchByAddress/>
+            </div>
+            <Footer />
+          </div>
         } />
         <Route path="*" element={
           <>
