@@ -21,7 +21,9 @@ const LooDetail = () => {
     const looFound = useSelector((state) => {
         return state.getLooById.looFound
     })
+    console.log(looFound)
     const idUser = useSelector((state) => state.getPersonalProfile.userLogged.id)
+    console.log(idUser)
 
     //DISPATCH:
     const dispatch = useDispatch()
@@ -38,6 +40,7 @@ const LooDetail = () => {
     //EFFECT:
     useEffect(() => {
         dispatch(fetchLooById(params.looId))
+        console.log(params.looId)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -64,7 +67,6 @@ const LooDetail = () => {
     const handleChangeState = () => {
         dispatch(fetchChangeLooState(params.looId))
     }
-
 
 
     return (
@@ -122,7 +124,7 @@ const LooDetail = () => {
                                 looFound.owner.id === idUser &&                             <Button className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm " onClick={handleChangeState}>Change state</Button>
                             }
                             {
-                                looFound.owner.id !== idUser &&                             <Button className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm ">Book</Button>
+                                looFound.owner.id !== idUser &&                             <Button className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm">Book</Button>
                             }
                         </div>
                     </div>   
