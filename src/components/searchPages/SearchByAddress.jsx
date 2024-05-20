@@ -128,7 +128,7 @@ const SearchByAddress = () => {
                 }
                 {
                   inputValue === "" && (
-                    <Col xs={12} className="bg-white rounded shadow lg mt-5 d-flex justify-content-center p-5 mb-5">
+                    <Col xs={12} className="bg-white rounded shadow lg mt-5 d-flex justify-content-center p-5" style={{marginBottom: "9em"}}>
                     <div className="p-5 bg-tertiary w-100 h-100 d-flex justify-content-center rounded shadow-sm border-primary" style={{borderStyle: "dashed"}}>
                         <h3 className="fs-2 fw-light text-dark">Insert an address</h3>
                     </div>

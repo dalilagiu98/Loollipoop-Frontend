@@ -63,13 +63,41 @@ const MyBookings = () => {
                             myBookings.length === 0 ? (<ListGroup.Item className="text-center text-primary">No booking found</ListGroup.Item>) : (
                                 myBookings.map((booking) => (
                                     <ListGroup.Item key={booking.id} className="d-flex justify-content-between ">
-                                        <span>
-                                            Booking for <span className="text-dark fw-medium">{booking.loo.name}</span>, in <span className="text-dark fw-medium">{booking.loo.address}</span>
-                                        </span>
-                                        <span className="d-flex align-items-start">
-                                            <p className="m-0 fw-medium">STATE:</p>
-                                            <Badge bg="tertiary" className="text-primary ms-2">{booking.bookingState}</Badge>
-                                        </span>
+                                        <Container>
+                                            <Row>
+                                                <Col xs={12} md={9}>
+                                                <div className="d-flex align-items-center">
+                                                    <p>Booking for <span className="text-dark fw-medium">{booking.loo.name}</span>, in <span className="text-dark fw-medium">{booking.loo.address}</span></p>
+                                                </div>
+                                                </Col>
+                                                <Col xs={12} md={3}>
+                                                <span className="d-flex align-items-start justify-content-center ">
+                                                    {
+                                                        booking.bookingState === "IN_PROGRESS" && (
+                                                            <>
+                                                            <p className="m-0 fw-medium">STATE:</p>
+                                                            <Badge bg="tertiary" className="text-primary ms-2">{booking.bookingState}</Badge>
+                                                            </>
+                                                        ) 
+                                                    }
+                                                    {
+                                                        booking.bookingState === "REJECTED" && (
+                                                            <>
+                                                            <p className="m-0 fw-medium">STATE:</p>
+                                                            <Badge bg="tertiary" className="text-primary ms-2">{booking.bookingState}</Badge>
+                                                            </>
+                                                        ) 
+                                                    }
+                                                    {
+                                                        booking.bookingState === "ACCEPTED" && !booking.looReviewDone && <Button className=" text-secondary border border-secondary fw-medium rounded-pill px-4 shadow-sm">See an advertising</Button>
+                                                    }
+
+                                                </span>
+                                                </Col>
+                                            </Row>
+                                        </Container>
+
+                                        
                                         
                                     </ListGroup.Item>
                                 ))
