@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Container, Row, Col, Card, Badge, Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { fetchChangeLooState, fetchLooById } from "../../redux/actions/action"
+import { fetchChangeLooState, fetchCreateBooking, fetchGetMyBookings, fetchLooById } from "../../redux/actions/action"
 import { CiLocationOn } from "react-icons/ci";
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import ChangeLooImageModal from "./ChangeLooImageModal"
@@ -24,6 +24,7 @@ const LooDetail = () => {
     console.log(looFound)
     const idUser = useSelector((state) => state.getPersonalProfile.userLogged.id)
     console.log(idUser)
+    const myBookings = useSelector((state) => state.getMyBookings.myBookings)
 
     //DISPATCH:
     const dispatch = useDispatch()
@@ -40,9 +41,9 @@ const LooDetail = () => {
     //EFFECT:
     useEffect(() => {
         dispatch(fetchLooById(params.looId))
-        console.log(params.looId)
+        dispatch(fetchGetMyBookings())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [dispatch])
 
     //FUNCTIONS:
     const generateRatingIcons = (rating) => {
@@ -68,12 +69,27 @@ const LooDetail = () => {
         dispatch(fetchChangeLooState(params.looId))
     }
 
+    // const handleClick = (looId) => {
+    //     dispatch(fetchCreateBooking(looId))
+    // }
+    const handleClick = (looId) => {
+        dispatch(fetchCreateBooking(looId))
+            .then(() => {
+                dispatch(fetchGetMyBookings());
+            })
+            .catch((error) => {
+                console.error("Failed to create booking:", error);
+            });
+    }
+
+    const hasActiveBooking = myBookings.some((booking) => booking.loo.id === looFound.id && booking.bookingState === "IN_PROGRESS")
+
     //VARIABLES:
     const isOwner = looFound.owner && looFound.owner.id === idUser;
 
-    if (!looFound) {
-        return <div>Loading...</div>; // o qualsiasi altro indicatore di caricamento
-    }
+    // if (!looFound) {
+    //     return <div>Loading...</div>; // o qualsiasi altro indicatore di caricamento
+    // }
 
     return (
         <Container className="h-100" style={{marginTop: "6em"}}>
@@ -130,7 +146,7 @@ const LooDetail = () => {
                                 isOwner &&                             <Button className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm " onClick={handleChangeState}>Change state</Button>
                             }
                             {
-                                !isOwner &&                             <Button className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm">Book</Button>
+                                !isOwner &&                             <Button className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm" onClick={() => handleClick(looFound.id)} disabled={hasActiveBooking || looFound.looState === "BUSY"}>Book</Button>
                             }
                         </div>
                     </div>   

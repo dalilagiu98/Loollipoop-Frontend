@@ -1,14 +1,28 @@
 import { Col, Container, Row } from "react-bootstrap";
 import MapComponent from "./MapComponent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DetailLooSelected from "./DetailLooSelected";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGetMyBookings } from "../../redux/actions/action";
 
 const SearchByPosition = () => {
 
+    //DISPATCH:
+    const dispatch = useDispatch()
+
+    //EFFECT:
+    useEffect(() => {
+        dispatch(fetchGetMyBookings())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    const myBookings = useSelector((state) => state.getMyBookings.myBookings)
+    console.log(myBookings)
+
     //STATE:
     const [looSelected, setLooSelected] = useState(null)
-    const changeLoo = (loo) => setLooSelected(loo)
-
+    const changeLoo = (loo) => {
+        setLooSelected(loo)
+    }    
     return (
         <Container className="mt-5 mb-5">
             <Row>

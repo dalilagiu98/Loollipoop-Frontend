@@ -34,6 +34,9 @@ export const GET_LOO_BY_ADDRESS_REQUEST = "GET_LOO_BY_ADDRESS_REQUEST";
 export const GET_LOO_BY_ADDRESS = "GET_LOO_BY_ADDRESS";
 export const GET_LOO_BY_ADDRESS_FAILURE = "GET_LOO_BY_ADDRESS_FAILURE";
 
+export const GET_MY_BOOKINGS = "GET_MY_BOOKINGS";
+export const CREATE_BOOKING = "CREATE_BOOKING";
+
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_USER_REQUEST });
@@ -391,7 +394,6 @@ export const fetchGetNearbyLoo = (latPrefix, longPrefix) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("loos nearby fetch: " + JSON.stringify(data));
         dispatch({ type: GET_NEARBY_LOO, payload: data });
       } else {
         throw new Error("No loos found nearby current position");
@@ -423,6 +425,51 @@ export const fetchGetLooByAddress = (address) => {
       } else {
         dispatch({ type: GET_LOO_BY_ADDRESS_FAILURE });
         throw new Error("Error in getting loo by address");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchGetMyBookings = () => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch("http://localhost:3001/users/me/bookings", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: GET_MY_BOOKINGS, payload: data });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchCreateBooking = (looId) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch(
+        "http://localhost:3001/loos/" + looId + "/bookings",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CREATE_BOOKING, payload: data });
       }
     } catch (err) {
       console.log(err);

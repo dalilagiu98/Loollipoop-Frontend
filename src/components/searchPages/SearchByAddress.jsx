@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Row, Card, Button, Badge } from "react-bootstrap";
+import { Col, Container, Row, Card, Badge } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -116,8 +116,7 @@ const SearchByAddress = () => {
 
                                         <div className="d-flex justify-content-between align-items-center">
 
-                                        <Badge bg={loo.looState === "BUSY" ? ("tertiary text-primary") : ("dark")} className= {!(loo.owner.id === idUser) && "h-50"}>{loo.looState}</Badge>
-                                        { loo.owner.id !== idUser &&                         <Button className="text-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm " disabled={loo.looState === "BUSY"}>Book</Button>}
+                                        <Badge bg={loo.looState === "BUSY" ? ("tertiary text-primary") : ("dark")} className= {!(loo.owner.id === idUser) && "h-100"}>{loo.looState}</Badge>
 
                                         </div>
                                     </Card.Body>

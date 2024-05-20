@@ -8,6 +8,8 @@ import getPersonalLooReducer from "../reducers/getPersonalLoo";
 import getLooByIdReducer from "../reducers/getLooById";
 import getNearbyLooReducer from "../reducers/getNearbyLoo";
 import getLooByAddressReducer from "../reducers/getLooByAddress";
+import getMyBookingsReducer from "../reducers/getMyBookings";
+import createBookingReducer from "../reducers/createBooking";
 
 const mainReducer = combineReducers({
   createUser: createUserReducer,
@@ -19,6 +21,8 @@ const mainReducer = combineReducers({
   getLooById: getLooByIdReducer,
   getNearbyLoo: getNearbyLooReducer,
   getLooByAddress: getLooByAddressReducer,
+  getMyBookings: getMyBookingsReducer,
+  createBooking: createBookingReducer,
 });
 
 const store = configureStore({
