@@ -5,21 +5,30 @@ import { FaStar } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAcceptBooking, fetchGetLooBooking, fetchGetMyBookings, fetchGetMyLoo, fetchRejectBooking } from "../../redux/actions/action";
+import { fetchAcceptBooking, fetchChangeStateAdvertisingBooking, fetchCreateAdvertising, fetchGetLooBooking, fetchGetMyBookings, fetchGetMyLoo, fetchRejectBooking } from "../../redux/actions/action";
 import ModalUserReview from "./ModalUserReview";
+import { useNavigate } from "react-router-dom";
+import ModalLooReview from "../advertising/ModalLooReview";
 
 const MyBookings = () => {
 
     //STATE:
     const [show, setShow] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
     //SELECTOR:
     const myBookings = useSelector((state) => state.getMyBookings.myBookings)
     console.log(myBookings)
     const looBookings = useSelector((state) => state.getLooBooking.looBooking)
+    const roles = useSelector((state) => {
+        return state.getPersonalProfile.userLogged.roles || [];
+    })
 
     //DISPATCH:
     const dispatch = useDispatch()
+
+    //NAVIGATE:
+    const navigate = useNavigate()
 
     //EFFECT:
     useEffect(() => {
@@ -29,7 +38,7 @@ const MyBookings = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch ])
 
-    //FUNCITONS:
+    //FUNCTIONS:
     const acceptBooking = (bookingId) => {
         dispatch(fetchAcceptBooking(bookingId)).then(() => {
             dispatch(fetchGetLooBooking())
@@ -44,13 +53,21 @@ const MyBookings = () => {
             console.error("Failed to reject booking: ", error)
         })
     }
+    const handleCreateAdvertising = (looId, bookingId) => {
+        dispatch(fetchCreateAdvertising(looId))
+        dispatch(fetchChangeStateAdvertisingBooking(bookingId))
+        navigate("/advertising")
+    }
 
 
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
+    const handleShowModal = () => setShowModal(true);
+    const handleCloseModal = () => setShowModal(false);
+
     return (
-        <Container style={{marginTop: "4em", marginBottom:"10em"}}>
+        <Container style={{marginTop: "5em", marginBottom:"10em"}}>
             <Row className="mt-4 mb-3">
                 <Col>
                 <h1 className="display-1 fw-medium text-center text-md-end">Your Bookings</h1>
@@ -89,9 +106,21 @@ const MyBookings = () => {
                                                         ) 
                                                     }
                                                     {
-                                                        booking.bookingState === "ACCEPTED" && !booking.looReviewDone && <Button className=" text-secondary border border-secondary fw-medium rounded-pill px-4 shadow-sm">See an advertising</Button>
+                                                        booking.bookingState === "ACCEPTED" && !booking.advertisingSeen && !booking.looReviewDone && <Button className=" text-secondary border border-secondary fw-medium rounded-pill px-4 shadow-sm" onClick={() => handleCreateAdvertising(booking.loo.id, booking.id)}>Watch an advertising</Button>
                                                     }
-
+                                                    {
+                                                        booking.bookingState === "ACCEPTED" && booking.advertisingSeen && !booking.looReviewDone && <Button className=" text-secondary border border-secondary fw-medium rounded-pill px-4 shadow-sm" onClick={handleShowModal}>Make a review</Button>
+                                                    }
+                                                    {
+                                                        showModal && <ModalLooReview handleClose={handleCloseModal} show={showModal} looId={booking.loo.id} bookingId={booking.id}/>
+                                                    }
+                                                    {
+                                                        booking.advertisingSeen && booking.looReviewDone && (
+                                                            <>
+                                                            <p className="m-0 fw-medium">STATE:</p>
+                                                            <Badge bg="tertiary" className="text-primary ms-2">{booking.bookingState}</Badge>
+                                                            </>)
+                                                    }
                                                 </span>
                                                 </Col>
                                             </Row>
@@ -106,9 +135,12 @@ const MyBookings = () => {
                     </ListGroup>
                 </Col>
             </Row>
-            <Row className="mt-5">
+            {
+                roles.includes('HOST') && (
+                    <>
+                                    <Row className="mt-5">
                 <Col>
-                <h1 className="display-1 fw-medium text-center text-md-start">Bookings for your loo</h1>
+                <h1 className="display-1 fw-medium text-center text-md-start">Bookings for your loos</h1>
                 </Col>
             </Row>
             <Row className="p-4 rounded bg-white shadow-lg gx-6 mt-5">
@@ -119,7 +151,7 @@ const MyBookings = () => {
                                 looBookings.map((booking) => (
                                     <ListGroup.Item key={booking.id} className="d-flex justify-content-between ">
                                         <Container>
-                                            <Row>
+                                            <Row className="d-flex align-items-center">
                                                 <Col xs={12} md={9}>
                                                     <div className="d-flex align-items-center">
                                                     <p>Booking for <span className="text-dark fw-medium ms-1">{booking.loo.name}</span>, by <span className="text-dark fw-medium ms-1">{booking.user.name} {booking.user.surname}</span> (<span className="text-dark">{Math.round(booking.user.rate * 10) / 10} <FaStar className="mb-1"/></span>)</p>
@@ -168,6 +200,10 @@ const MyBookings = () => {
                     </ListGroup>
                 </Col>
             </Row>
+                    </>
+                )
+            }
+
         </Container>
     )
 }

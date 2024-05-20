@@ -17,6 +17,7 @@ import SearchByPosition from "./components/searchPages/SearchByPosition";
 import Settings from "./components/settings/Settings";
 import SearchByAddress from "./components/searchPages/SearchByAddress";
 import MyBookings from "./components/bookings/MyBookings";
+import Advertising from "./components/advertising/Advertising";
 
 function App() {
   return (
@@ -55,6 +56,13 @@ function App() {
             <Footer />
             </div>
           </div>
+        } />
+        <Route path="/advertising" element={
+          <>
+          <MyNav />
+          <Advertising />
+          <Footer />
+          </>
         } />
         <Route path="/loo/:looId" element={
           <>

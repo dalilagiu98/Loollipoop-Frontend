@@ -150,7 +150,7 @@ const Profile = () => {
                                         <img src='logo.png' alt='logo' style={{height: '1.8em'}}/>                     
                                         <h4 className="text-dark fw-bolder m-0">Rate:</h4>
                                     </div>
-                                    <h4 className="m-0 me-3 fw-medium">{rate}<span className="fs-6 fw-light text-dark ms-1">pt.</span></h4>
+                                    <h4 className="m-0 me-3 fw-medium">{Math.round(rate * 10) / 10}<span className="fs-6 fw-light text-dark ms-1">pt.</span></h4>
                                 </div>
                                 <div className="d-flex justify-content-center mt-4">
                                     
@@ -203,7 +203,7 @@ const Profile = () => {
 
                             <div>
                                 <h6 className="fw-light text-dark mt-3">You have earned:</h6>
-                                <p className="display-2 text-end">{userLogged.cashBalance}<span className="display-3 text-dark ms-3">€</span></p>
+                                <p className="display-2 text-end">{Math.round(userLogged.cashBalance * 10) / 10}<span className="display-3 text-dark ms-3">€</span></p>
                                 
                             </div>
 

@@ -43,6 +43,15 @@ export const REJECT_BOOKING = "REJECT_BOOKING";
 export const CREATE_USER_REVIEW = "CREATE_USER_REVIEW";
 export const CHANGE_STATE_USER_BOOKING = "CHANGE_STATE_USER_BOOKING";
 
+export const CREATE_ADVERTISING = "CREATE_ADVERTISING";
+export const UPDATE_CASH_HOST = "UPDATE_CASH_HOST";
+export const UPDATE_CASH_GUEST = "UPDATE_CASH_GUEST";
+
+export const CREATE_LOO_REVIEW = "CREATE_LOO_REVIEW";
+export const CHANGE_STATE_LOO_BOOKING = "CHANGE_STATE_LOO_BOOKING";
+export const CHANGE_STATE_ADVERTISING_BOOKING =
+  "CHANGE_STATE_ADVERTISING_BOOKING";
+
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_USER_REQUEST });
@@ -607,6 +616,170 @@ export const fetchChangeStateUserBooking = (bookingId) => {
       if (response.ok) {
         const data = await response.json();
         dispatch({ type: CHANGE_STATE_USER_BOOKING, payload: data });
+      } else {
+        throw new Error("Error in change state of user booking");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchCreateAdvertising = (looId) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch(
+        "http://localhost:3001/loos/" + looId + "/advertising",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CREATE_ADVERTISING, payload: data });
+      } else {
+        throw new Error("Error in create advertising");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchUpdateCashHost = (userId, amount) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    let body = JSON.stringify({ amount });
+    try {
+      let response = await fetch(
+        "http://localhost:3001/users/" + userId + "/cashHost",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: body,
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("updated");
+        dispatch({ type: UPDATE_CASH_HOST, payload: data });
+      } else {
+        throw new Error("Error in update cash Host");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchUpdateCashGuest = (amount) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    let body = JSON.stringify({ amount });
+    try {
+      let response = await fetch("http://localhost:3001/users/me/cashGuest", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: body,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("updated");
+        dispatch({ type: UPDATE_CASH_GUEST, payload: data });
+      } else {
+        throw new Error("Error in update cash Host");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchCreateLooReview = (looId, review) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    let body = JSON.stringify(review);
+    try {
+      let response = await fetch(
+        "http://localhost:3001/loos/" + looId + "/reviews",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: body,
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CREATE_LOO_REVIEW, payload: data });
+      } else {
+        throw new Error("Error in creating user review");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchChangeStateLooBooking = (bookingId) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch(
+        "http://localhost:3001/bookings/" + bookingId + "/looReview",
+        {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CHANGE_STATE_LOO_BOOKING, payload: data });
+      } else {
+        throw new Error("Error in change state of user booking");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchChangeStateAdvertisingBooking = (bookingId) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch(
+        "http://localhost:3001/bookings/" + bookingId + "/advertising",
+        {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CHANGE_STATE_ADVERTISING_BOOKING, payload: data });
       } else {
         throw new Error("Error in change state of user booking");
       }
