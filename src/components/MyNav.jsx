@@ -5,6 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import { IoSettingsOutline } from "react-icons/io5";
+import { TbClipboardText } from "react-icons/tb";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
 import { logoutAction } from '../redux/actions/action';
@@ -61,6 +62,7 @@ const tokenLocalStorage = localStorage.getItem("accessToken")
                 <img src={avatarImage} alt='logo' style={{width: "40px", height:"40px", objectFit: "cover"}} className='rounded-circle'/>
             } id="collapsible-nav-dropdown" className='dropstart'>
               <Link to="/me" className='dropdown-item'><i className="bi bi-person-circle"></i> Account</Link>
+              <Link to="/bookings" className='dropdown-item d-flex align-items-center'><TbClipboardText className='me-1'/>Bookings </Link>
               <Link to="/settings" className='dropdown-item d-flex align-items-center'><IoSettingsOutline className='me-1'/>Settings </Link>
               <NavDropdown.Divider />
               <Button onClick={handleLogout} className='dropdown-item'><i className="bi bi-box-arrow-right"></i> Logout</Button>

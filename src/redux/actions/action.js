@@ -36,6 +36,12 @@ export const GET_LOO_BY_ADDRESS_FAILURE = "GET_LOO_BY_ADDRESS_FAILURE";
 
 export const GET_MY_BOOKINGS = "GET_MY_BOOKINGS";
 export const CREATE_BOOKING = "CREATE_BOOKING";
+export const GET_LOO_BOOKING = "GET_LOO_BOOKING";
+export const ACCEPT_BOOKING = "ACCEPT_BOOKING";
+export const REJECT_BOOKING = "REJECT_BOOKING";
+
+export const CREATE_USER_REVIEW = "CREATE_USER_REVIEW";
+export const CHANGE_STATE_USER_BOOKING = "CHANGE_STATE_USER_BOOKING";
 
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
@@ -470,6 +476,139 @@ export const fetchCreateBooking = (looId) => {
       if (response.ok) {
         const data = await response.json();
         dispatch({ type: CREATE_BOOKING, payload: data });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchGetLooBooking = () => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch(
+        "http://localhost:3001/users/me/loos/bookings",
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: GET_LOO_BOOKING, payload: data });
+      } else {
+        throw new Error("Error in getting loo bookings");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchAcceptBooking = (bookingId) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch(
+        "http://localhost:3001/bookings/" + bookingId + "/acceptState",
+        {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: ACCEPT_BOOKING, payload: data });
+      } else {
+        throw new Error("Error in accept booking");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchRejectBooking = (bookingId) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch(
+        "http://localhost:3001/bookings/" + bookingId + "/rejectState",
+        {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: REJECT_BOOKING, payload: data });
+      } else {
+        throw new Error("Error in accept booking");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchCreateUserReview = (userId, review) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    let body = JSON.stringify(review);
+    try {
+      let response = await fetch(
+        "http://localhost:3001/users/" + userId + "/reviews",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          body: body,
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CREATE_USER_REVIEW, payload: data });
+      } else {
+        throw new Error("Error in creating user review");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchChangeStateUserBooking = (bookingId) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch(
+        "http://localhost:3001/bookings/" + bookingId + "/userReview",
+        {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CHANGE_STATE_USER_BOOKING, payload: data });
+      } else {
+        throw new Error("Error in change state of user booking");
       }
     } catch (err) {
       console.log(err);

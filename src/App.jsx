@@ -16,6 +16,7 @@ import LooDetail from "./components/loos/LooDetail";
 import SearchByPosition from "./components/searchPages/SearchByPosition";
 import Settings from "./components/settings/Settings";
 import SearchByAddress from "./components/searchPages/SearchByAddress";
+import MyBookings from "./components/bookings/MyBookings";
 
 function App() {
   return (
@@ -43,6 +44,17 @@ function App() {
            <Settings />
            <Footer />
           </>
+        } />
+        <Route path="/bookings" element={
+          <div className="d-flex flex-column h-100">
+            <MyNav />
+            <div className="flex-grow-1">
+              <MyBookings />
+            </div>
+            <div>
+            <Footer />
+            </div>
+          </div>
         } />
         <Route path="/loo/:looId" element={
           <>
