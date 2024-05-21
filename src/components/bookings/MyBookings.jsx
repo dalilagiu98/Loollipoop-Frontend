@@ -38,18 +38,26 @@ const MyBookings = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch ])
 
+    useEffect(() => {
+        if (show === false && showModal === false) {
+            dispatch(fetchGetMyBookings());
+            dispatch(fetchGetLooBooking());
+        }
+    }, [show, showModal, dispatch]);
+
+    const refetchBookings = () => {
+        dispatch(fetchGetMyBookings());
+        dispatch(fetchGetLooBooking());
+    };
+
     //FUNCTIONS:
     const acceptBooking = (bookingId) => {
-        dispatch(fetchAcceptBooking(bookingId)).then(() => {
-            dispatch(fetchGetLooBooking())
-        }).catch((error) => {
+        dispatch(fetchAcceptBooking(bookingId)).then(refetchBookings).catch((error) => {
             console.error("Failed to accept booking: ", error)
         })
     }
     const rejectBooking = (bookingId) => {
-        dispatch(fetchRejectBooking(bookingId)).then(() => {
-            dispatch(fetchGetLooBooking())
-        }).catch((error) => {
+        dispatch(fetchRejectBooking(bookingId)).then(refetchBookings).catch((error) => {
             console.error("Failed to reject booking: ", error)
         })
     }
@@ -178,14 +186,14 @@ const MyBookings = () => {
                                                         booking.bookingState === "ACCEPTED" && !booking.userReviewDone && <Button className=" text-secondary border border-secondary fw-medium rounded-pill px-4 shadow-sm" onClick={handleShow}>Make review</Button>
                                                     }
                                                     {
-                                                        booking.userReviewDone && (
+                                                        booking.userReviewDone && booking.bookingState === "ACCEPTED" && (
                                                             <>   
                                                             <p className="m-0 fw-medium">STATE:</p>
                                                             <Badge bg="tertiary" className="text-primary ms-2">{booking.bookingState}</Badge>
                                                             </> )
                                                     }
                                                     {
-                                                        show && <ModalUserReview handleClose={handleClose} show={show} booking= {booking}/>
+                                                        show && <ModalUserReview handleClose={handleClose} show={show} booking= {booking} refetchBookings={refetchBookings}/>
                                                     }
                                                 </span>
                                                 </Col>

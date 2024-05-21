@@ -6,11 +6,11 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from 'react';
 import { FaRegStar, FaStar} from "react-icons/fa";
 import { useDispatch } from 'react-redux';
-import { fetchChangeStateUserBooking, fetchCreateUserReview, fetchGetLooBooking } from '../../redux/actions/action';
+import { fetchChangeStateUserBooking, fetchCreateUserReview } from '../../redux/actions/action';
 
 
 // eslint-disable-next-line react/prop-types
-const ModalUserReview = ({show, handleClose, booking}) => {
+const ModalUserReview = ({show, handleClose, booking, refetchBookings}) => {
 
     //STATE:
     const [form, setForm] = useState({
@@ -44,9 +44,7 @@ const ModalUserReview = ({show, handleClose, booking}) => {
             // eslint-disable-next-line react/prop-types
             await dispatch(fetchCreateUserReview(booking.user.id, form)).then(() => {
                 dispatch(fetchChangeStateUserBooking(booking.id))
-            }).then(() => {
-                dispatch(fetchGetLooBooking())
-            }).catch((error) => {
+            }).then(refetchBookings).catch((error) => {
                 console.log(error)
             });
             handleClose();
