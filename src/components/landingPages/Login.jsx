@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector,  } from "react-redux";
 import { fetchLoginUser,  } from '../../redux/actions/action';
 import { Link, useNavigate } from "react-router-dom";
+import ModalChangePasswordEmail from './ModalChangePasswordEmail';
 
 const Login = () => {
 
@@ -13,6 +14,8 @@ const Login = () => {
         email: "",
         password: ""
     });
+
+    const [show, setShow] = useState(false)
 
     //SELECTOR:
     const isLoading = useSelector((state) => {
@@ -39,6 +42,9 @@ const Login = () => {
         e.preventDefault();
         dispatch(fetchLoginUser(form))
     }
+
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
 
     //EFFECT:
     useEffect(() => {
@@ -88,6 +94,12 @@ const Login = () => {
                         })}
                         />
                     </InputGroup>
+                
+                    <Button onClick={handleShow} ><u>Have you forgot your password?</u></Button>
+                 
+                    {
+                        show && <ModalChangePasswordEmail handleClose={handleClose} show={show}/>
+                    }
                     
                     <div className="d-flex justify-content-center">
                     {
