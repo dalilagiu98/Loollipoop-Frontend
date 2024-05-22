@@ -20,6 +20,7 @@ import updateCashReducer from "../reducers/updateCash";
 import changeStateLooBookingReducer from "../reducers/changeStateLooBooking";
 import createLooReviewReducer from "../reducers/createLooReview";
 import changeStateAdvertisingBookingReducer from "../reducers/changeStateAdvertisingBooking";
+import getReviewByIdReducer from "../reducers/getReviewById";
 
 const mainReducer = combineReducers({
   createUser: createUserReducer,
@@ -43,6 +44,7 @@ const mainReducer = combineReducers({
   changeStateLooBooking: changeStateLooBookingReducer,
   createLooReview: createLooReviewReducer,
   changeStateAdvertisingBooking: changeStateAdvertisingBookingReducer,
+  getReviewById: getReviewByIdReducer,
 });
 
 const store = configureStore({

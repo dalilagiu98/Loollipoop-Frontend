@@ -7,6 +7,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchCreateBooking, fetchGetMyBookings } from '../../redux/actions/action';
+import { Link } from 'react-router-dom';
 
 const DetailLooSelected = ({looSelected}) => {
 
@@ -73,7 +74,8 @@ const DetailLooSelected = ({looSelected}) => {
                     <Card.Body className="d-flex flex-column">
                     <div className='d-flex justify-content-between '>
                         <Card.Title className="text-dark fw-bold fs-6">{looSelected.name}</Card.Title>
-                        <Card.Text>{generateRatingIcons(looSelected.rate)}</Card.Text>
+                        <Card.Text><Link to={"/loo/"+ looSelected.id + "/reviews"} className="border-bottom border-primary"> {generateRatingIcons(looSelected.rate)} </Link></Card.Text>
+                        
                     </div>
                     <Card.Text style={{fontSize: "0.8em"}} className="text-dark"><CiLocationOn />{looSelected.address}</Card.Text>
                     <Card.Text className="bg-tertiary rounded px-3 py-1 shadow-sm flex-grow-1 d-flex align-items-center justify-content-center" style={{fontSize: "0.8em"}}>{looSelected.description}</Card.Text>

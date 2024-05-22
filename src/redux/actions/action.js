@@ -42,6 +42,8 @@ export const REJECT_BOOKING = "REJECT_BOOKING";
 
 export const CREATE_USER_REVIEW = "CREATE_USER_REVIEW";
 export const CHANGE_STATE_USER_BOOKING = "CHANGE_STATE_USER_BOOKING";
+export const GET_REVIEW_BY_LOO_ID = "GET_REVIEW_BY_LOO_ID";
+export const GET_REVIEW_BY_USER_ID = "GET_REVIEW_BY_USER_ID";
 
 export const CREATE_ADVERTISING = "CREATE_ADVERTISING";
 export const UPDATE_CASH_HOST = "UPDATE_CASH_HOST";
@@ -782,6 +784,58 @@ export const fetchChangeStateAdvertisingBooking = (bookingId) => {
         dispatch({ type: CHANGE_STATE_ADVERTISING_BOOKING, payload: data });
       } else {
         throw new Error("Error in change state of user booking");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchGetReviewByLooId = (looId) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch(
+        "http://localhost:3001/loos/" + looId + "/reviews",
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: GET_REVIEW_BY_LOO_ID, payload: data });
+      } else {
+        throw new Error("Error in getting review by loo id");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchGetReviewByUserId = (userId) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch(
+        "http://localhost:3001/users/" + userId + "/reviews",
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: GET_REVIEW_BY_USER_ID, payload: data });
+      } else {
+        throw new Error("Error in getting review by user id");
       }
     } catch (err) {
       console.log(err);

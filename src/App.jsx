@@ -18,6 +18,8 @@ import Settings from "./components/settings/Settings";
 import SearchByAddress from "./components/searchPages/SearchByAddress";
 import MyBookings from "./components/bookings/MyBookings";
 import Advertising from "./components/advertising/Advertising";
+import LooReviewsDetails from "./components/reviews/LooReviewsDetails";
+import UserReview from "./components/reviews/UserReview";
 
 function App() {
   return (
@@ -71,6 +73,20 @@ function App() {
             <Footer />
           </> 
         }/>
+        <Route path="/loo/:looId/reviews" element={
+          <>
+            <MyNav />
+            <LooReviewsDetails />
+            <Footer />
+          </>
+        } />
+        <Route path="/users/:userId/reviews" element = {
+          <>
+          <MyNav />
+          <UserReview />
+          <Footer />
+          </>
+        } />
         <Route path="/searchByPosition" element={
           <>
             <MyNav />

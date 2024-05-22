@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Container, Row, Col, Card, Badge, Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { fetchChangeLooState, fetchCreateBooking, fetchGetMyBookings, fetchLooById } from "../../redux/actions/action"
 import { CiLocationOn } from "react-icons/ci";
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
@@ -38,6 +38,7 @@ const LooDetail = () => {
 
     const handleShowDetails = () => setShowDetails(true);
     const handleCloseDetails = () => setShowDetails(false);
+    
     //EFFECT:
     useEffect(() => {
         dispatch(fetchLooById(params.looId))
@@ -108,7 +109,7 @@ const LooDetail = () => {
                             }}>
                             <i
                                 onClick={handleShowImage}
-                                className="bi bi-pencil-fill text-secondary fs-3 btn rounded-circle" style={{                            position: "absolute",
+                                className="bi bi-pencil-fill text-secondary fs-3 btn rounded-circle" style={{position: "absolute",
                                 top: "50%",
                                 left: "50%",
                                 transform: "translate(-50%, -50%)",}}
@@ -134,7 +135,9 @@ const LooDetail = () => {
                         <h5 className="fw-light text-dark"><CiLocationOn className="fs-4"/>{looFound.address}</h5>
 
                         <div className="d-flex justify-content-start mt-3">
-                            {generateRatingIcons(looFound.rate)}
+                            <Link to={"/loo/" + looFound.id + "/reviews"} className="border-bottom border-primary">
+                                {generateRatingIcons(looFound.rate)}
+                            </Link>
                         </div>
 
                         <Card.Body className="bg-tertiary rounded shadow-sm p-2 text-center mt-4 d-flex align-items-center " style={{lineHeight: "1.8em"}}>{looFound.description}</Card.Body>

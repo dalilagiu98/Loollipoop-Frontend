@@ -7,7 +7,7 @@ import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAcceptBooking, fetchChangeStateAdvertisingBooking, fetchCreateAdvertising, fetchGetLooBooking, fetchGetMyBookings, fetchGetMyLoo, fetchRejectBooking } from "../../redux/actions/action";
 import ModalUserReview from "./ModalUserReview";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ModalLooReview from "../advertising/ModalLooReview";
 
 const MyBookings = () => {
@@ -162,7 +162,7 @@ const MyBookings = () => {
                                             <Row className="d-flex align-items-center">
                                                 <Col xs={12} md={9}>
                                                     <div className="d-flex align-items-center">
-                                                    <p>Booking for <span className="text-dark fw-medium ms-1">{booking.loo.name}</span>, by <span className="text-dark fw-medium ms-1">{booking.user.name} {booking.user.surname}</span> (<span className="text-dark">{Math.round(booking.user.rate * 10) / 10} <FaStar className="mb-1"/></span>)</p>
+                                                    <p>Booking for <span className="text-dark fw-medium ms-1">{booking.loo.name}</span>, by <span className="text-dark fw-medium ms-1">{booking.user.name} {booking.user.surname}</span> (<Link to={"/users/" + booking.user.id + "/reviews"} className="border-bottom border-primary" style={{textDecoration: "none"}}><span className="text-dark">{Math.round(booking.user.rate * 10) / 10} <FaStar className="mb-1"/></span></Link>)</p>
                                                     </div>
                                                 </Col>
                                                 <Col xs={12} md={3}>
