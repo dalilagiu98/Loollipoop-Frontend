@@ -849,7 +849,7 @@ export const fetchGetReviewByUserId = (userId) => {
 export const fetchChangePasswordByUserId = (password) => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
-    let body = JSON.stringify(password);
+    let body = JSON.stringify({ password });
     try {
       let response = await fetch("http://localhost:3001/users/me/password", {
         method: "PUT",
@@ -863,7 +863,6 @@ export const fetchChangePasswordByUserId = (password) => {
       if (response.ok) {
         const data = await response.json();
         dispatch({ type: CHANGE_PASSWORD_BY_USER_ID, payload: data });
-        dispatch({ type: GET_PERSONAL_PROFILE });
       } else {
         throw new Error("Error in changing password");
       }
@@ -876,7 +875,7 @@ export const fetchChangePasswordByUserId = (password) => {
 export const fetchChangePasswordByEmail = (email, password) => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
-    let body = JSON.stringify(password);
+    let body = JSON.stringify({ password });
     try {
       let response = await fetch(
         "http://localhost:3001/auth/password?email=" + email,

@@ -1,15 +1,20 @@
 import { useState } from "react"
 import { Col, Container, Row } from "react-bootstrap"
 import ModalDeleteProfile from "./ModalDeleteProfile";
+import ModalChangePassword from "./ModalChangePassword";
 
 const Settings = () => {
 
     //STATE:
     const [show, setShow] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
 
     //FUNCTIONS:
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
+
+    const handleShowPassword = () => setShowPassword(true)
+    const handleClosePassword = () => setShowPassword(false)
 
     return (
         <Container style={{marginTop: "5em", marginBottom: "7em"}}>
@@ -28,7 +33,10 @@ const Settings = () => {
                     <div className="d-flex flex-column border-primary h-100" style={{borderStyle: "dashed"}}>
                         <div className="d-flex align-items-center p-5">
                             <img src="logo.png" alt="logo" style={{height: "3.8em"}}/>
-                            <h3 className="text-dark" style={{cursor: "pointer"}}><u>Change password</u></h3>
+                            <h3 className="text-dark" style={{cursor: "pointer"}} onClick={handleShowPassword}><u>Change password</u></h3>
+                            {
+                                showPassword && <ModalChangePassword handleClose={handleClosePassword} show={showPassword}/>
+                            }
                         </div>
                         <div className="d-flex align-items-center p-5">
                             <img src="logo.png" alt="logo" style={{height: "3.8em"}}/>
