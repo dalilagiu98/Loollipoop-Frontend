@@ -20,6 +20,7 @@ import MyBookings from "./components/bookings/MyBookings";
 import Advertising from "./components/advertising/Advertising";
 import LooReviewsDetails from "./components/reviews/LooReviewsDetails";
 import UserReview from "./components/reviews/UserReview";
+import BubblesAboutUs from "./components/landingPages/BubblesAboutUs";
 
 function App() {
   return (
@@ -32,6 +33,12 @@ function App() {
           <>
           <MyNav />
           <Footer />
+          </>
+        } />
+        <Route path="/aboutus" element={
+          <>
+          <MyNav />
+          <BubblesAboutUs />
           </>
         } />
         <Route path="/me" element={

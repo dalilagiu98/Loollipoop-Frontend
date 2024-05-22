@@ -6,7 +6,7 @@ import { FaDiscord } from "react-icons/fa6";
 
 const Footer = () => {
     return(
-        <Container fluid style={{background: "linear-gradient(rgba(247, 245, 238, 0.07), rgba(247, 245, 238, 0.5),rgba(247, 245, 238, 0.7),rgba(247, 245, 238, 0.9), rgba(247, 245, 238, 1))"}} className="py-3">
+        <Container fluid style={{background: "linear-gradient(rgba(247, 245, 238, 0.07), rgba(247, 245, 238, 0.5),rgba(247, 245, 238, 0.7),rgba(247, 245, 238, 0.9), rgba(247, 245, 238, 1))"}} className="py-3 z-3">
             <Row className="justify-content-around py-4 mt-4">
                 <Col className="h-100">
                     <div className="d-flex justify-content-center align-items-center">
@@ -17,7 +17,7 @@ const Footer = () => {
                 <Col>
                     <div className="d-flex flex-column align-items-center">
                         <h4 className="text-dark fw-bold fs-5">Loollipoop</h4>
-                        <Link to="/" className="text-primary fw-medium">About us</Link>
+                        <Link to="/aboutus" className="text-primary fw-medium">About us</Link>
                         <Link to="/" className="text-primary fw-medium text-center">Leave us a feedback</Link>
                     </div>
                 </Col>
