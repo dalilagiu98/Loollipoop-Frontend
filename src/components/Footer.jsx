@@ -18,7 +18,7 @@ const Footer = () => {
                     <div className="d-flex flex-column align-items-center">
                         <h4 className="text-dark fw-bold fs-5">Loollipoop</h4>
                         <Link to="/aboutus" className="text-primary fw-medium">About us</Link>
-                        <Link to="/" className="text-primary fw-medium text-center">Leave us a feedback</Link>
+                        <Link to="/feedback" className="text-primary fw-medium text-center">Leave us a feedback</Link>
                     </div>
                 </Col>
 

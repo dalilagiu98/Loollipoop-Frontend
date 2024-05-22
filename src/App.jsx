@@ -21,6 +21,7 @@ import Advertising from "./components/advertising/Advertising";
 import LooReviewsDetails from "./components/reviews/LooReviewsDetails";
 import UserReview from "./components/reviews/UserReview";
 import BubblesAboutUs from "./components/landingPages/BubblesAboutUs";
+import MyFeedback from "./components/settings/MyFeedback";
 
 function App() {
   return (
@@ -53,6 +54,13 @@ function App() {
            <MyNav />
            <Settings />
            <Footer />
+          </>
+        } />
+        <Route path="/feedback" element={
+          <>
+          <MyNav />
+          <MyFeedback />
+          <Footer />
           </>
         } />
         <Route path="/bookings" element={

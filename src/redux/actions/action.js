@@ -57,6 +57,10 @@ export const CHANGE_STATE_ADVERTISING_BOOKING =
 export const CHANGE_PASSWORD_BY_USER_ID = "CHANGE_PASSWORD_BY_USER_ID";
 export const CHANGE_PASSWORD_BY_EMAIL = "CHANGE_PASSWORD_BY_EMAIL";
 
+export const CREATE_FEEDBACK = "CREATE_FEEDBACK";
+export const CREATE_FEEDBACK_REQUEST = "CREATE_FEEDBACK_REQUEST";
+export const CREATE_FEEDBACK_FAILURE = "CREATE_FEEDBACK_FAILURE";
+
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_USER_REQUEST });
@@ -894,6 +898,34 @@ export const fetchChangePasswordByEmail = (email, password) => {
         dispatch({ type: CHANGE_PASSWORD_BY_EMAIL, payload: data });
       } else {
         throw new Error("Error in changing password");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchCreateFeedback = (feedback) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    let body = JSON.stringify(feedback);
+    dispatch({ type: CREATE_FEEDBACK_REQUEST });
+    try {
+      let response = await fetch("http://localhost:3001/users/me/feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: body,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CREATE_FEEDBACK, payload: data });
+      } else {
+        dispatch({ type: CREATE_FEEDBACK_FAILURE });
+        throw new Error("Error in creating feedback");
       }
     } catch (err) {
       console.log(err);

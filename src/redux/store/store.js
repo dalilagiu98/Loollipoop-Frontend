@@ -22,6 +22,7 @@ import createLooReviewReducer from "../reducers/createLooReview";
 import changeStateAdvertisingBookingReducer from "../reducers/changeStateAdvertisingBooking";
 import getReviewByIdReducer from "../reducers/getReviewById";
 import changePasswordReducer from "../reducers/changePassword";
+import createFeedbackReducer from "../reducers/createFeedback";
 
 const mainReducer = combineReducers({
   createUser: createUserReducer,
@@ -47,6 +48,7 @@ const mainReducer = combineReducers({
   changeStateAdvertisingBooking: changeStateAdvertisingBookingReducer,
   getReviewById: getReviewByIdReducer,
   changePassword: changePasswordReducer,
+  createFeedback: createFeedbackReducer,
 });
 
 const store = configureStore({

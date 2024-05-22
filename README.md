@@ -1,2 +1,1 @@
-# Loollipoop-Frontend
- Frontend project for Loollipoop
+![Alt text] (./public/banner.png)
