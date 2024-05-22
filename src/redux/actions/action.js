@@ -54,6 +54,9 @@ export const CHANGE_STATE_LOO_BOOKING = "CHANGE_STATE_LOO_BOOKING";
 export const CHANGE_STATE_ADVERTISING_BOOKING =
   "CHANGE_STATE_ADVERTISING_BOOKING";
 
+export const CHANGE_PASSWORD_BY_USER_ID = "CHANGE_PASSWORD_BY_USER_ID";
+export const CHANGE_PASSWORD_BY_EMAIL = "CHANGE_PASSWORD_BY_EMAIL";
+
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_USER_REQUEST });
@@ -836,6 +839,62 @@ export const fetchGetReviewByUserId = (userId) => {
         dispatch({ type: GET_REVIEW_BY_USER_ID, payload: data });
       } else {
         throw new Error("Error in getting review by user id");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchChangePasswordByUserId = (password) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    let body = JSON.stringify(password);
+    try {
+      let response = await fetch("http://localhost:3001/users/me/password", {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: body,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CHANGE_PASSWORD_BY_USER_ID, payload: data });
+        dispatch({ type: GET_PERSONAL_PROFILE });
+      } else {
+        throw new Error("Error in changing password");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchChangePasswordByEmail = (email, password) => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    let body = JSON.stringify(password);
+    try {
+      let response = await fetch(
+        "http://localhost:3001/auth/password?email=" + email,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+          body: body,
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: CHANGE_PASSWORD_BY_EMAIL, payload: data });
+      } else {
+        throw new Error("Error in changing password");
       }
     } catch (err) {
       console.log(err);
