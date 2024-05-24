@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/banner.png" alt="Sublime's custom image"/>
+  <img src="https://github.com/dalilagiu98/Loollipoop-Frontend/blob/readme/public/banner.png" alt="banner"/>
 </p>
 
 # Loollipoop🚻✨
@@ -21,25 +21,25 @@ https://github.com/dalilagiu98/Loollipoop-Backend
 
 ### Frontend:
 
-⚛️🚀 React + Vite: Fast and optimized development setup for React.
-🅱️ React-Bootstrap: Bootstrap components for React.
-🖼️ React-Icons: Include popular icons in your React projects.
-🗃️ React-Redux: State management for React apps.
-🟠 JavaScript: Programming language for the web.
-📝🎨 HTML & CSS: Standard technologies for building web pages.
-💅 SASS: CSS extension for easier styling.
-🗺️ Leaflet: Interactive maps.
-🔄🌐 Positionstack API: External API for address search.
-📍🗺️ Geoapify API: Geolocation API for custom markers on maps.
-
 ![Static Badge](https://img.shields.io/badge/React-20232A?logo=react)
-![Static Badge](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Static Badge](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/HTML-darkorange?logo=html5)
 ![Static Badge](https://img.shields.io/badge/CSS-darkblue?logo=css3)
 ![Static Badge](https://img.shields.io/badge/Sass-pink?logo=sass)
 ![Static Badge](https://img.shields.io/badge/JavaScript-yellow?logo=javascript)
 ![Static Badge](https://img.shields.io/badge/TypeScript-lightblue?logo=typescript)
 ![Static Badge](https://img.shields.io/badge/Bootstrap-purple?logo=bootstrap)
+
+⚛️🚀 React + Vite: Fast and optimized development setup for React. <br>
+🅱️ React-Bootstrap: Bootstrap components for React. <br>
+🖼️ React-Icons: Include popular icons in your React projects. <br>
+🗃️ React-Redux: State management for React apps. <br>
+🟠 JavaScript: Programming language for the web. <br>
+📝🎨 HTML & CSS: Standard technologies for building web pages. <br>
+💅 SASS: CSS extension for easier styling. <br>
+🗺️ Leaflet: Interactive maps. <br>
+🔄🌐 Positionstack API: External API for address search. <br>
+📍🗺️ Geoapify API: Geolocation API for custom markers on maps. <br>
 
 ### Backend:
 
@@ -61,7 +61,7 @@ Navigate to the Loollipoop-Frontend directory. <br>
 Run ![Static Badge](https://img.shields.io/badge/npm_install-lightgrey?logo=npm)
 to install frontend dependencies. <br>
 In your file env.properties configure API token for external services (Positionstack and Geoapify). <br>
-Run ![Static Badge](https://img.shields.io/badge/run%20dev-3178C6?logo=npm) to start the frontend development server. <br>
+Run ![Static Badge](https://img.shields.io/badge/run%20dev-lightgrey?logo=npm) to start the frontend development server. <br>
 
 ### Access the application:
 
