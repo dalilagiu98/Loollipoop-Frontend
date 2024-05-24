@@ -78,7 +78,7 @@ const MyFeedback = () => {
                         isLoading && <Spinner animation="border" variant="secondary"/>
                     }
                     {
-                        !isLoading && isLoaded && !isError &&  <h6 className="text-dark fw-medium">Uploaded!</h6>
+                        !isLoading && isLoaded && !isError &&  <h6 className="text-dark fw-medium mt-5">Uploaded!</h6>
                     }
                 </div>
                 <Button className=" text-secondary border border-secondary fs-5 fw-medium rounded-pill px-4 shadow-sm mt-5" onClick={handleSave}>
