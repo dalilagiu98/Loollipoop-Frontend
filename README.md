@@ -21,22 +21,22 @@ https://github.com/dalilagiu98/Loollipoop-Backend
 
 ### Frontend:
 
-![Static Badge](https://img.shields.io/badge/React-20232A?logo=react)
-![Static Badge](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/HTML-darkorange?logo=html5)
 ![Static Badge](https://img.shields.io/badge/CSS-darkblue?logo=css3)
-![Static Badge](https://img.shields.io/badge/Sass-pink?logo=sass)
 ![Static Badge](https://img.shields.io/badge/JavaScript-yellow?logo=javascript)
-![Static Badge](https://img.shields.io/badge/TypeScript-lightblue?logo=typescript)
 ![Static Badge](https://img.shields.io/badge/Bootstrap-purple?logo=bootstrap)
+![Static Badge](https://img.shields.io/badge/Sass-pink?logo=sass)
+![Static Badge](https://img.shields.io/badge/React-20232A?logo=react)
+![Static Badge](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+![Static Badge](https://img.shields.io/badge/Redux-20232A?logo=redux)
 
-⚛️🚀 React + Vite: Fast and optimized development setup for React. <br>
+📝🎨 HTML & CSS: Standard technologies for building web pages. <br>
+🟠 JavaScript: Programming language for the web. <br>
 🅱️ React-Bootstrap: Bootstrap components for React. <br>
+💅 SASS: CSS extension for easier styling. <br>
+⚛️🚀 React + Vite: Fast and optimized development setup for React. <br>
 🖼️ React-Icons: Include popular icons in your React projects. <br>
 🗃️ React-Redux: State management for React apps. <br>
-🟠 JavaScript: Programming language for the web. <br>
-📝🎨 HTML & CSS: Standard technologies for building web pages. <br>
-💅 SASS: CSS extension for easier styling. <br>
 🗺️ Leaflet: Interactive maps. <br>
 🔄🌐 Positionstack API: External API for address search. <br>
 📍🗺️ Geoapify API: Geolocation API for custom markers on maps. <br>
