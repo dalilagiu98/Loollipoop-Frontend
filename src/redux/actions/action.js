@@ -60,6 +60,7 @@ export const CHANGE_PASSWORD_BY_EMAIL = "CHANGE_PASSWORD_BY_EMAIL";
 export const CREATE_FEEDBACK = "CREATE_FEEDBACK";
 export const CREATE_FEEDBACK_REQUEST = "CREATE_FEEDBACK_REQUEST";
 export const CREATE_FEEDBACK_FAILURE = "CREATE_FEEDBACK_FAILURE";
+export const GET_FEEDBACK = "GET_FEEDBACK";
 
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
@@ -926,6 +927,29 @@ export const fetchCreateFeedback = (feedback) => {
       } else {
         dispatch({ type: CREATE_FEEDBACK_FAILURE });
         throw new Error("Error in creating feedback");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchGetFeedback = () => {
+  return async (dispatch) => {
+    let token = localStorage.getItem("accessToken");
+    try {
+      let response = await fetch("http://localhost:3001/feedback", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: GET_FEEDBACK, payload: data.content });
+      } else {
+        throw new Error("Error in getting feedback");
       }
     } catch (err) {
       console.log(err);

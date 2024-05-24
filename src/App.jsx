@@ -22,6 +22,7 @@ import LooReviewsDetails from "./components/reviews/LooReviewsDetails";
 import UserReview from "./components/reviews/UserReview";
 import BubblesAboutUs from "./components/landingPages/BubblesAboutUs";
 import MyFeedback from "./components/settings/MyFeedback";
+import Home from "./components/landingPages/Home";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={
           <>
           <MyNav />
+          <Home />
           <Footer />
           </>
         } />
