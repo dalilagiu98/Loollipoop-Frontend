@@ -17,18 +17,23 @@ https://github.com/dalilagiu98/Loollipoop-Backend
 ⭐📊 Ratings & Reviews: Each user and loo has a rating based on reviews. <br>
 ⏳📺 Booking & Ads: Users must watch an advertisement before using a loo. The ad duration and cost depend on the loo's rating.
 
+<p align="center">
+  <img src= alt="banner"/>
+</p>
+
 ## Technologies Used 💻
 
 ### Frontend
 
-![Static Badge](https://img.shields.io/badge/HTML-darkorange?logo=html5)
-![Static Badge](https://img.shields.io/badge/CSS-darkblue?logo=css3)
-![Static Badge](https://img.shields.io/badge/JavaScript-yellow?logo=javascript)
-![Static Badge](https://img.shields.io/badge/Bootstrap-purple?logo=bootstrap)
-![Static Badge](https://img.shields.io/badge/Sass-pink?logo=sass)
-![Static Badge](https://img.shields.io/badge/React-20232A?logo=react)
-![Static Badge](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
-![Static Badge](https://img.shields.io/badge/Redux-20232A?logo=redux)
+![HTML5 Badge](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=fff&style=for-the-badge)
+![CSS3 Badge](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=fff&style=for-the-badge)
+![JavaScript Badge](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000&style=for-the-badge)
+![Bootstrap Badge](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=fff&style=for-the-badge)
+![Sass Badge](https://img.shields.io/badge/Sass-C69?logo=sass&logoColor=fff&style=for-the-badge)
+![React Badge](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000&style=for-the-badge)
+![Vite Badge](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff&style=for-the-badge)
+![React Router Badge](https://img.shields.io/badge/React%20Router-CA4245?logo=reactrouter&logoColor=fff&style=for-the-badge)
+![Redux Badge](https://img.shields.io/badge/Redux-764ABC?logo=redux&logoColor=fff&style=for-the-badge)
 
 📝🎨 HTML & CSS: Standard technologies for building web pages. <br>
 🟠 JavaScript: Programming language for the web. <br>
@@ -43,26 +48,26 @@ https://github.com/dalilagiu98/Loollipoop-Backend
 
 ### Backend
 
-![Static Badge](https://img.shields.io/badge/Java-white)
-![Static Badge](https://img.shields.io/badge/Spring-green?logo=spring)
-![Static Badge](https://img.shields.io/badge/SpringBoot-darkgreen?logo=springboot)
-![Static Badge](https://img.shields.io/badge/Spring_Security-grey?logo=springsecurity)
-![Static Badge](https://img.shields.io/badge/Cloudinary-lightblue?logo=cloudinary)
-![Static Badge](https://img.shields.io/badge/PostMan-grey?logo=postman)
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Badge](https://img.shields.io/badge/Spring-6DB33F?logo=spring&logoColor=fff&style=for-the-badge)
+![Spring Boot Badge](https://img.shields.io/badge/Spring%20Boot-6DB33F?logo=springboot&logoColor=fff&style=for-the-badge)
+![Spring Security Badge](https://img.shields.io/badge/Spring%20Security-6DB33F?logo=springsecurity&logoColor=fff&style=for-the-badge)
+![Cloudinary Badge](https://img.shields.io/badge/Cloudinary-3448C5?logo=cloudinary&logoColor=fff&style=for-the-badge)
+![Postman Badge](https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=fff&style=for-the-badge)
 
 ### Database
 
-![Static Badge](https://img.shields.io/badge/PostgreSQL-blue)
+![PostgreSQL Badge](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=fff&style=for-the-badge)
 
 ## Setup 🔧
 
 ### Front-end Setup
 
-Navigate to the Loollipoop-Frontend directory. <br>
-Run ![Static Badge](https://img.shields.io/badge/npm_install-lightgrey?logo=npm)
-to install frontend dependencies. <br>
-In your file env.properties configure API token for external services (Positionstack and Geoapify). <br>
-Run ![Static Badge](https://img.shields.io/badge/run%20dev-lightgrey?logo=npm) to start the frontend development server. <br>
+1. Navigate to the Loollipoop-Frontend directory. <br>
+2. Run ![Static Badge](https://img.shields.io/badge/npm_install-lightgrey?logo=npm)
+   to install frontend dependencies. <br>
+3. In your file env.properties configure API token for external services (Positionstack and Geoapify). <br>
+4. Run ![Static Badge](https://img.shields.io/badge/run%20dev-lightgrey?logo=npm) to start the frontend development server. <br>
 
 ### Access the application
 
@@ -76,5 +81,20 @@ Find a Loo: Use the search feature to locate nearby private restrooms.<br>
 Book a Loo: Send a booking request and wait for the owner's approval.<br>
 Watch Ads: View an advertisement to complete your booking.<br>
 Rate and Review: Leave feedback to help improve the community.<br>
+
+## Deploy 🚀
+
+Both the backend and frontend of the app have been deployed and are fully accessible.
+
+1. 🚀🐋 The backend is hosted on Koyeb;
+2. 🌐✨ the frontend is hosted on Vercel.
+   You can access all the functionalities through the link provided in the description. <br/>
+
+![Static Badge](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Koyeb Badge](https://img.shields.io/badge/Koyeb-121212?logo=koyeb&logoColor=fff&style=for-the-badge)
+
+## IDE Frontend 📟
+
+![Static Badge](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
 
 # Dalila Giurgola
