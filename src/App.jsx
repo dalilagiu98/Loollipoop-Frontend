@@ -25,14 +25,14 @@ import MyFeedback from "./components/settings/MyFeedback";
 import Home from "./components/landingPages/Home";
 
 function App() {
+  
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/welcome" element={<BubblesWelcome />} />
+        <Route path="/" element={<BubblesWelcome />} />
         <Route path="/registration" element={<BubblesRegister />} />
         <Route path="/login" element={<BubblesLogin />} />
-        <Route path="/" element={
-          <>
+        <Route path="/home" element={<>
           <MyNav />
           <Home />
           <Footer />

@@ -62,12 +62,14 @@ export const CREATE_FEEDBACK_REQUEST = "CREATE_FEEDBACK_REQUEST";
 export const CREATE_FEEDBACK_FAILURE = "CREATE_FEEDBACK_FAILURE";
 export const GET_FEEDBACK = "GET_FEEDBACK";
 
+const urlDevelop = import.meta.env.VITE_URL_DEVELOP;
+
 export const fetchCreateUser = (newUser) => {
   return async (dispatch) => {
     dispatch({ type: CREATE_USER_REQUEST });
     const body = JSON.stringify(newUser);
     try {
-      const response = await fetch("http://localhost:3001/auth/register", {
+      const response = await fetch(urlDevelop + "/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +100,7 @@ export const fetchLoginUser = (user) => {
     dispatch({ type: LOGIN_USER_REQUEST });
     const body = JSON.stringify(user);
     try {
-      const response = await fetch("http://localhost:3001/auth/login", {
+      const response = await fetch(urlDevelop + "/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -126,7 +128,7 @@ export const fetchPersonalProfile = () => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
     try {
-      const response = await fetch("http://localhost:3001/users/me", {
+      const response = await fetch(urlDevelop + "/users/me", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -159,7 +161,7 @@ export const fetchDeleteUser = () => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
     try {
-      let response = await fetch("http://localhost:3001/users/me", {
+      let response = await fetch(urlDevelop + "/users/me", {
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + token,
@@ -183,7 +185,7 @@ export const fetchCreateLoos = (loo) => {
     const body = JSON.stringify(loo);
     let token = localStorage.getItem("accessToken");
     try {
-      let response = await fetch("http://localhost:3001/users/me/loos", {
+      let response = await fetch(urlDevelop + "/users/me/loos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -244,7 +246,7 @@ export const fetchGetMyLoo = () => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
     try {
-      let response = await fetch("http://localhost:3001/loos/myLoos", {
+      let response = await fetch(urlDevelop + "/loos/myLoos", {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,
@@ -270,7 +272,7 @@ export const fetchDeleteLoo = (looId) => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
     try {
-      let response = await fetch("http://localhost:3001/loos/myLoos/" + looId, {
+      let response = await fetch(urlDevelop + "/loos/myLoos/" + looId, {
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + token,
@@ -293,7 +295,7 @@ export const fetchLooById = (looId) => {
     dispatch({ type: GET_LOO_BY_ID_REQUEST });
     let token = localStorage.getItem("accessToken");
     try {
-      const response = await fetch("http://localhost:3001/loos/" + looId, {
+      const response = await fetch(urlDevelop + "/loos/" + looId, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -317,7 +319,7 @@ export const fetchChangeLooState = (looId) => {
     let token = localStorage.getItem("accessToken");
     try {
       const response = await fetch(
-        "http://localhost:3001/loos/myLoos/" + looId + "/changeState",
+        urlDevelop + "/loos/myLoos/" + looId + "/changeState",
         {
           method: "PATCH",
           headers: {
@@ -346,7 +348,7 @@ export const fetchChangeLooImage = (looId, file) => {
     formData.append("looImage", file);
     try {
       let response = await fetch(
-        "http://localhost:3001/loos/myLoos/" + looId + "/looImage",
+        urlDevelop + "/loos/myLoos/" + looId + "/looImage",
         {
           method: "PATCH",
           body: formData,
@@ -376,7 +378,7 @@ export const fetchChangeLooDetails = (looId, updatedLoo) => {
     dispatch({ type: CHANGE_LOO_DETAILS_REQUEST });
     try {
       let response = await fetch(
-        "http://localhost:3001/loos/myLoos/" + looId + "/details",
+        urlDevelop + "/loos/myLoos/" + looId + "/details",
         {
           method: "PUT",
           body: body,
@@ -404,7 +406,8 @@ export const fetchGetNearbyLoo = (latPrefix, longPrefix) => {
     let token = localStorage.getItem("accessToken");
     try {
       let response = await fetch(
-        "http://localhost:3001/loos/searchByPosition?latPrefix=" +
+        urlDevelop +
+          "/loos/searchByPosition?latPrefix=" +
           latPrefix +
           "&longPrefix=" +
           longPrefix,
@@ -435,7 +438,7 @@ export const fetchGetLooByAddress = (address) => {
     dispatch({ type: GET_LOO_BY_ADDRESS_REQUEST });
     try {
       let response = await fetch(
-        "http://localhost:3001/loos/searchByAddress?address=" + address,
+        urlDevelop + "/loos/searchByAddress?address=" + address,
         {
           method: "GET",
           headers: {
@@ -461,7 +464,7 @@ export const fetchGetMyBookings = () => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
     try {
-      let response = await fetch("http://localhost:3001/users/me/bookings", {
+      let response = await fetch(urlDevelop + "/users/me/bookings", {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,
@@ -482,15 +485,12 @@ export const fetchCreateBooking = (looId) => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
     try {
-      let response = await fetch(
-        "http://localhost:3001/loos/" + looId + "/bookings",
-        {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+      let response = await fetch(urlDevelop + "/loos/" + looId + "/bookings", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -506,15 +506,12 @@ export const fetchGetLooBooking = () => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
     try {
-      let response = await fetch(
-        "http://localhost:3001/users/me/loos/bookings",
-        {
-          method: "GET",
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+      let response = await fetch(urlDevelop + "/users/me/loos/bookings", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -533,7 +530,7 @@ export const fetchAcceptBooking = (bookingId) => {
     let token = localStorage.getItem("accessToken");
     try {
       let response = await fetch(
-        "http://localhost:3001/bookings/" + bookingId + "/acceptState",
+        urlDevelop + "/bookings/" + bookingId + "/acceptState",
         {
           method: "PUT",
           headers: {
@@ -559,7 +556,7 @@ export const fetchRejectBooking = (bookingId) => {
     let token = localStorage.getItem("accessToken");
     try {
       let response = await fetch(
-        "http://localhost:3001/bookings/" + bookingId + "/rejectState",
+        urlDevelop + "/bookings/" + bookingId + "/rejectState",
         {
           method: "PUT",
           headers: {
@@ -585,17 +582,14 @@ export const fetchCreateUserReview = (userId, review) => {
     let token = localStorage.getItem("accessToken");
     let body = JSON.stringify(review);
     try {
-      let response = await fetch(
-        "http://localhost:3001/users/" + userId + "/reviews",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          body: body,
-        }
-      );
+      let response = await fetch(urlDevelop + "/users/" + userId + "/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: body,
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -614,7 +608,7 @@ export const fetchChangeStateUserBooking = (bookingId) => {
     let token = localStorage.getItem("accessToken");
     try {
       let response = await fetch(
-        "http://localhost:3001/bookings/" + bookingId + "/userReview",
+        urlDevelop + "/bookings/" + bookingId + "/userReview",
         {
           method: "PUT",
           headers: {
@@ -640,7 +634,7 @@ export const fetchCreateAdvertising = (looId) => {
     let token = localStorage.getItem("accessToken");
     try {
       let response = await fetch(
-        "http://localhost:3001/loos/" + looId + "/advertising",
+        urlDevelop + "/loos/" + looId + "/advertising",
         {
           method: "POST",
           headers: {
@@ -667,7 +661,7 @@ export const fetchUpdateCashHost = (userId, amount) => {
     let body = JSON.stringify({ amount });
     try {
       let response = await fetch(
-        "http://localhost:3001/users/" + userId + "/cashHost",
+        urlDevelop + "/users/" + userId + "/cashHost",
         {
           method: "PUT",
           headers: {
@@ -696,7 +690,7 @@ export const fetchUpdateCashGuest = (amount) => {
     let token = localStorage.getItem("accessToken");
     let body = JSON.stringify({ amount });
     try {
-      let response = await fetch("http://localhost:3001/users/me/cashGuest", {
+      let response = await fetch(urlDevelop + "/users/me/cashGuest", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -723,17 +717,14 @@ export const fetchCreateLooReview = (looId, review) => {
     let token = localStorage.getItem("accessToken");
     let body = JSON.stringify(review);
     try {
-      let response = await fetch(
-        "http://localhost:3001/loos/" + looId + "/reviews",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + token,
-          },
-          body: body,
-        }
-      );
+      let response = await fetch(urlDevelop + "/loos/" + looId + "/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: body,
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -752,7 +743,7 @@ export const fetchChangeStateLooBooking = (bookingId) => {
     let token = localStorage.getItem("accessToken");
     try {
       let response = await fetch(
-        "http://localhost:3001/bookings/" + bookingId + "/looReview",
+        urlDevelop + "/bookings/" + bookingId + "/looReview",
         {
           method: "PUT",
           headers: {
@@ -778,7 +769,7 @@ export const fetchChangeStateAdvertisingBooking = (bookingId) => {
     let token = localStorage.getItem("accessToken");
     try {
       let response = await fetch(
-        "http://localhost:3001/bookings/" + bookingId + "/advertising",
+        urlDevelop + "/bookings/" + bookingId + "/advertising",
         {
           method: "PUT",
           headers: {
@@ -803,15 +794,12 @@ export const fetchGetReviewByLooId = (looId) => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
     try {
-      let response = await fetch(
-        "http://localhost:3001/loos/" + looId + "/reviews",
-        {
-          method: "GET",
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+      let response = await fetch(urlDevelop + "/loos/" + looId + "/reviews", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -829,15 +817,12 @@ export const fetchGetReviewByUserId = (userId) => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
     try {
-      let response = await fetch(
-        "http://localhost:3001/users/" + userId + "/reviews",
-        {
-          method: "GET",
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+      let response = await fetch(urlDevelop + "/users/" + userId + "/reviews", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -856,7 +841,7 @@ export const fetchChangePasswordByUserId = (password) => {
     let token = localStorage.getItem("accessToken");
     let body = JSON.stringify({ password });
     try {
-      let response = await fetch("http://localhost:3001/users/me/password", {
+      let response = await fetch(urlDevelop + "/users/me/password", {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + token,
@@ -882,17 +867,14 @@ export const fetchChangePasswordByEmail = (email, password) => {
     let token = localStorage.getItem("accessToken");
     let body = JSON.stringify({ password });
     try {
-      let response = await fetch(
-        "http://localhost:3001/auth/password?email=" + email,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-          },
-          body: body,
-        }
-      );
+      let response = await fetch(urlDevelop + "/auth/password?email=" + email, {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: body,
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -912,7 +894,7 @@ export const fetchCreateFeedback = (feedback) => {
     let body = JSON.stringify(feedback);
     dispatch({ type: CREATE_FEEDBACK_REQUEST });
     try {
-      let response = await fetch("http://localhost:3001/users/me/feedback", {
+      let response = await fetch(urlDevelop + "/users/me/feedback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -938,7 +920,7 @@ export const fetchGetFeedback = () => {
   return async (dispatch) => {
     let token = localStorage.getItem("accessToken");
     try {
-      let response = await fetch("http://localhost:3001/feedback", {
+      let response = await fetch(urlDevelop + "/feedback", {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,

@@ -60,7 +60,7 @@ const Register = function () {
         <>
         <Row>
             <Col>
-                <Link to="/welcome" className='btn btn-primary rounded-circle'><i className="bi bi-chevron-left"></i></Link>
+                <Link to="/" className='btn btn-primary rounded-circle'><i className="bi bi-chevron-left"></i></Link>
             </Col>
         </Row>
         <Row className='justify-content-center'>

@@ -49,7 +49,7 @@ const Login = () => {
     //EFFECT:
     useEffect(() => {
         if(isLoaded && !isError) {
-            navigate("/")
+            navigate("/home")
         }
     }, [isLoaded, isError, navigate])
 
@@ -58,7 +58,7 @@ const Login = () => {
         <>
             <Row>
                 <Col>
-                    <Link to="/welcome" className='btn btn-primary rounded-circle'><i className="bi bi-chevron-left"></i></Link>
+                    <Link to="/" className='btn btn-primary rounded-circle'><i className="bi bi-chevron-left"></i></Link>
                 </Col>
             </Row>
             <Row className='justify-content-center'>
@@ -112,7 +112,7 @@ const Login = () => {
                         !isLoading && isError && <h6 className="text-secondary fw-medium">{errorMessage}</h6>
                     }
                     </div>    
-                    <Button type='submit' className='rounded-pill w-100 border -success mt-3'>Sign in!</Button>
+                    <Button type='submit' className='rounded-pill w-100 border-success mt-3'>Sign in!</Button>
                 </Form>
             </Col>
         </Row>

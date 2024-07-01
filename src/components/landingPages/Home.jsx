@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGetFeedback } from "../../redux/actions/action";
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 
@@ -14,11 +15,23 @@ const Home = () => {
     //DISPATCH:
     const dispatch = useDispatch()
 
+    //NAVIGATE:
+    const navigate = useNavigate();
+
     //EFFECT:
     useEffect(() => {
         dispatch(fetchGetFeedback())
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    //FUNCTIONS:
+    const goToPersonalProfile = () => {
+        navigate("/me")
+    }
+
+    const goToSearchProfile = () => {
+        navigate("/searchByPosition")
+    }
 
 
     const generateRatingIcons = (rating) => {
@@ -50,8 +63,8 @@ const Home = () => {
                             <h2 className="fs-1 fw-semibold">Share & Use Private Loo</h2>
                             <h4 className="p-0 m-0 fs-6 fw-normal ">Need a clean, private bathroom on the go? Or have a bathroom you&apos;d like to share and earn credits? Start now!</h4>
                             <div className="d-flex mt-3  flex-column flex-md-row justify-content-around">
-                            <Button className=" text-secondary border border-secondary fs-6 fs-md-5 fw-medium rounded-pill px-4 shadow-sm mb-3 mb-md-0">Share your Loo</Button>
-                            <Button  className="text-primary border border-primary fs-6 fs-md-5 fw-medium rounded-pill px-4 shadow-sm mb-4 mb-md-0" variant="secondary">Search by Position</Button>
+                            <Button className=" text-secondary border border-secondary fs-6 fs-md-5 fw-medium rounded-pill px-4 shadow-sm mb-3 mb-md-0" onClick={goToPersonalProfile}>Share your Loo</Button>
+                            <Button  className="text-primary border border-primary fs-6 fs-md-5 fw-medium rounded-pill px-4 shadow-sm mb-4 mb-md-0" variant="secondary" onClick={goToSearchProfile}>Search by Position</Button>
                             </div>
                         </div>
 
@@ -109,7 +122,7 @@ const Home = () => {
 
             </Container>
             <Container className="mt-4">
-                <Row className="d-flex justify-content-center gy-3 gx-4">
+                <Row className="d-flex justify-content-center gy-3 gx-4 mb-4">
                     <Col xs={12} className="mt-4">
                         <div className="d-flex justify-content-center">
                             <h2 className="fw-semibold">Testimonials</h2>
@@ -117,7 +130,7 @@ const Home = () => {
                     </Col>
                     {
                         feedback.map((feedback) => (
-                            <Col key={feedback.id} xs={10} md={3} className=" rounded p-2">
+                            <Col key={feedback.id} xs={10} md={6} lg={3} className=" rounded p-2">
                             <Card className="h-100 shadow">
                                 <Card.Body>
                                     <div className="d-flex flex-column justify-content-between border-bottom pb-2">

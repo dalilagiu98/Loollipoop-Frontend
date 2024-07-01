@@ -39,13 +39,13 @@ const tokenLocalStorage = localStorage.getItem("accessToken")
   //FUNCITONS:
   const handleLogout = () =>{
    dispatch(logoutAction())
-   navigate("/welcome") 
+   navigate("/") 
   }
 
   return(
     <Navbar collapseOnSelect expand="md" className="bg-dark py-0 position-fixed top-0 end-0 start-0 z-3">
       <Container fluid>
-        <Link to="/" className='navbar-brand'>
+        <Link to="/home" className='navbar-brand'>
           <img src='/logo.png' alt='logo' style={{height: '2em'}}/>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
