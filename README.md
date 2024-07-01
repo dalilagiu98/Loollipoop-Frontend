@@ -18,7 +18,7 @@ https://github.com/dalilagiu98/Loollipoop-Backend
 ⏳📺 Booking & Ads: Users must watch an advertisement before using a loo. The ad duration and cost depend on the loo's rating.
 
 <p align="center">
-  <img src= alt="banner"/>
+  <img src="https://github.com/dalilagiu98/Loollipoop-Frontend/blob/develop/public/preview.png?raw=true" alt="banner"/>
 </p>
 
 ## Technologies Used 💻
