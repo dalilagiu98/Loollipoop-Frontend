@@ -87,7 +87,7 @@ Rate and Review: Leave feedback to help improve the community.<br>
 Both the backend and frontend of the app have been deployed and are fully accessible.
 
 1. 🚀🐋 The backend is hosted on Koyeb;
-2. 🌐✨ the frontend is hosted on Vercel.
+2. 🌐✨ the frontend is hosted on Vercel. <br>
    You can access all the functionalities through the link provided in the description. <br/>
 
 ![Static Badge](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
